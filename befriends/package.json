@@ -7,7 +7,8 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint src --ext js,jsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "server": "npx nodemon --watch server src/server"
   },
   "dependencies": {
     "axios": "^1.4.0",
@@ -17,6 +18,7 @@
     "express-openid-connect": "^2.16.0",
     "http-errors": "~1.8.1",
     "morgan": "~1.10.0",
+    "nodemon": "^2.0.22",
     "path": "^0.12.7",
     "postgres": "^3.3.5",
     "react": "^18.2.0",

@@ -3,10 +3,9 @@ import express from 'express';
 import http from 'http';
 import logger from 'morgan';
 import path from 'path';
-import router from './routes/index';
-import { auth } from 'express-openid-connect';
+import router from './routes/routes.js';
+import pkg from 'express-openid-connect';
 import { fileURLToPath } from 'url';
-import { process } from 'process';
 
 dotenv.config();
 
@@ -15,6 +14,8 @@ dotenv.config();
 const app = express();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+const { requiresAuth } = pkg;
+
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
@@ -25,7 +26,11 @@ app.use(express.json());
 
 const config = {
   authRequired: false,
-  auth0Logout: true
+  auth0Logout: true,
+  secret: process.env.SECRET,
+  baseURL: `http://localhost:${process.env.PORT}`,
+  clientID: process.env.CLIENT_ID,
+  issuerBaseURL: 'http://localhost:3000/'
 };
 
 const port = process.env.PORT || 3000;
@@ -33,7 +38,7 @@ if (!config.baseURL && !process.env.BASE_URL && process.env.PORT && process.env.
   config.baseURL = `http://localhost:${port}`;
 }
 
-app.use(auth(config));
+app.use(pkg.auth(config));
 
 // Middleware to make the `user` object available for all views
 app.use(function (req, res, next) {
