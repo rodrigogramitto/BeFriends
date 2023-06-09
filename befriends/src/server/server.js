@@ -8,7 +8,7 @@ import { auth } from 'express-openid-connect';
 
 dotenv.config();
 
-dotenv.load();
+// dotenv.load();
 
 const app = express();
 
