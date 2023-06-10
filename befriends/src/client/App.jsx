@@ -2,9 +2,12 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
+import { useAuth0 } from '@auth0/auth0-react';
+import LoginButton from './loginButton.jsx';
 
 function App() {
   const [count, setCount] = useState(0)
+  const { isAuthenticated } = useAuth0()
 
   return (
     <>
@@ -28,6 +31,13 @@ function App() {
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
       </p>
+      <LoginButton />
+
+      {(isAuthenticated) &&
+      <div>
+        Hello World!
+      </div>
+      }
     </>
   )
 }
