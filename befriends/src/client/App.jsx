@@ -3,8 +3,8 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 import { useAuth0 } from '@auth0/auth0-react';
-import LoginButton from './loginButton.jsx';
-import LogoutButton from './logoutButton.jsx';
+import LoginButton from './components/loginButton.jsx';
+import LogoutButton from './component/logoutButton.jsx';
 
 function App() {
   const [count, setCount] = useState(0)
