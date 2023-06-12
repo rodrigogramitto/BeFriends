@@ -7,13 +7,27 @@ import Profile from './components/Profile/Profile.jsx';
 import NavBar from './components/navBar.jsx'
 
 function App() {
-  const [count, setCount] = useState(0)
   const { isAuthenticated } = useAuth0()
+  const [currentView, setCurrentView] = useState(0);
+  const viewSwitcher = (num) => {
+    setCurrentView(num);
+  }
 
+
+  // make a function to reassign current view and pass it to all main components
+  const views = {
+    0: <Questionnaire viewSwitcher={viewSwitcher} />,
+    1: <Profile viewSwitcher={viewSwitcher} />,
+    2: <h1>DiscoverMode</h1>,
+    3: <h1>FriendCircle</h1>
+  }
   return (
     <>
-      <NavBar />
-      <Profile />
+      <NavBar
+      viewSwitcher={viewSwitcher}
+      currentView={currentView}
+      setCurrentView={setCurrentView}
+      />
       {(!isAuthenticated) &&
         <LoginButton />
       }
@@ -21,7 +35,7 @@ function App() {
 
       {(isAuthenticated) &&
       <>
-        <Questionnaire />
+        {views[currentView]}
         <LogoutButton />
       </>
       }
