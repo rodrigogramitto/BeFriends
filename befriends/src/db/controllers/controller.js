@@ -16,7 +16,7 @@ const Controller = {
   addUser: async (user) => {
     console.log(user)
     try {
-      Model.Userinfo.create(user)
+      await Model.Userinfo.create(user)
     } catch (err) {
       return err.data
     }
