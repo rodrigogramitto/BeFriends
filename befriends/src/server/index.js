@@ -9,14 +9,14 @@ import sequelize from '../db/sequelize.js';
 dotenv.config();
 
 const app = express();
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+// const __filename = fileURLToPath(import.meta.url);
+// const __dirname = path.dirname(__filename);
 
 app.use(logger('dev'));
-app.use(express.static(path.join(__dirname, '../../index.html')));
+// app.use(express.static(path.join(__dirname, '../../dist')));
 app.use(express.json());
 
-app.use('/', router);
+app.use(router);
 
 try {
   app.listen(process.env.PORT || 3001, () => {

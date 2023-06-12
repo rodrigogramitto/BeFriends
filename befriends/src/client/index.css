@@ -71,3 +71,17 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+
+/*==============================================================
+Profile
+===============================================================*/
+
+.profile-banner {
+  width: 100%;
+  height: 150px;
+  background-image: url(https://picsum.photos/id/866/800/300);
+}
+
+.profile-info {
+  position: fixed;
+}
