@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
 import LoginButton from './components/loginButton.jsx';
 import LogoutButton from './components/logoutButton.jsx';
@@ -9,9 +9,10 @@ function App() {
 
   return (
     <>
-      <h1 class="text-3xl font-bold underline">
+    <div className='bg-primary'> 
+      <h1 className="text-5xl font-bold underline">
     Hello world!
-  </h1>
+    </h1>
 
       {(!isAuthenticated) &&
         <LoginButton />
@@ -21,6 +22,7 @@ function App() {
       {(isAuthenticated) &&
        <LogoutButton />
       }
+      </div>
     </>
   )
 }
