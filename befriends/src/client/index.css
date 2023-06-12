@@ -1,15 +1,28 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+@import url('https://rsms.me/inter/inter.css');
+
 
 :root {
+  --color-primary: #004E64;
+  --color-secondary: #25A18E;
+  --color-accent: #00A5CF;
+  --color-neutral: #2a323c;
+  --color-base-100: #1d232a;
+  --color-info: #9FFFCB;
+  --color-success: #36d399;
+  --color-warning: #ec4899;
+  --color-error: #9f1239;
+
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  background-color: var(--color-primary);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
