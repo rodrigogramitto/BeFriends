@@ -15,5 +15,15 @@ console.log(req.params.username)
   res.send()
 })
 
+router.get('/chats/:chattype/:chatid', (req, res) => {
+  Controller.getMessages(req.params.chatType, req.params.chatid)
+    .then((messages) => {
+      res.status(200).send(messages);
+    })
+    .catch((err) => {
+      res.status(400).send(err);
+    })
+})
+
 
 export default router;
