@@ -1,9 +1,12 @@
 import { useRef, useState } from "react";
+import axios from "axios";
+import { useAuth0 } from "@auth0/auth0-react";
+import PropTypes from 'prop-types';
 
-export default function Questionnaire() {
+export default function Questionnaire({ viewSwitcher }) {
+  const { user } = useAuth0();
   const [hobbyTags, setHobbyTags] = useState([]);
   const [interestTags, setInterestTags] = useState([]);
-  const usernameInput = useRef();
   const birthdayInput = useRef();
   const cityInput = useRef();
   const stateInput = useRef();
@@ -34,20 +37,32 @@ export default function Questionnaire() {
     setInterestTags((prevTags) => prevTags.filter((_, i) => i !== index));
   };
 
+  const submitUserInfo = (e) => {
+    e.preventDefault();
+
+    let body = {
+      firstname: user.given_name,
+      lastName: user.family_name,
+      username: user.nickname,
+      email: user.email,
+      birthday: birthdayInput.current.value,
+      location: `${cityInput.current.value}, ${stateInput.current.value}`,
+      profile_pic: user.picture,
+      banner_pic: "placeholder text",
+      hobby: hobbyTags.concat(interestTags)
+    }
+
+    axios
+      .post('/postUser', body)
+      .then((response) => {
+        console.log(response)
+        viewSwitcher(1);
+      })
+      .catch((err) => console.error(err));
+  };
+
   return (
-    <form
-      onSubmit={(e) => {
-        e.preventDefault();
-        console.log(
-          usernameInput.current.value,
-          birthdayInput.current.value,
-          cityInput.current.value,
-          stateInput.current.value,
-          hobbyTags,
-          interestTags
-        );
-      }}
-    >
+    <form onSubmit={submitUserInfo}>
       <div className="questionnaire-form-content bg-base-100">
         <div className="questionnaire-form-header">
           <h3 className="questionnaire-form-title">
@@ -57,19 +72,6 @@ export default function Questionnaire() {
 
         <div className="questionnaire-form-body">
           <h5 className="questionnaire-form-subtitle">Personal Information</h5>
-
-          <div className="questionnaire-form-input">
-            <h6>Username:</h6>
-            <label htmlFor="username-input"></label>
-            <input
-              id="username-input"
-              maxLength="30"
-              placeholder="Username"
-              ref={usernameInput}
-              required
-              type="text"
-            />
-          </div>
 
           <div className="questionnaire-form-input">
             <h6>Birthday:</h6>
@@ -169,7 +171,11 @@ export default function Questionnaire() {
 
           <div className="questionnaire-form-hobby">
             {hobbyTags.map((tag, index) => (
-              <span className="tag" key={index} onClick={()=> removeHobbyTag(index)}>
+              <span
+                className="tag"
+                key={index}
+                onClick={() => removeHobbyTag(index)}
+              >
                 &times;&nbsp;&nbsp;{tag}
               </span>
             ))}
@@ -193,7 +199,11 @@ export default function Questionnaire() {
 
         <div className="questionnaire-form-interest">
           {interestTags.map((tag, index) => (
-            <span className="tag" key={index} onClick={() => removeInterestTag(index)}>
+            <span
+              className="tag"
+              key={index}
+              onClick={() => removeInterestTag(index)}
+            >
               &times;&nbsp;&nbsp;{tag}
             </span>
           ))}
@@ -206,3 +216,7 @@ export default function Questionnaire() {
     </form>
   );
 }
+
+Questionnaire.propTypes = {
+  viewSwitcher: PropTypes.any.isRequired,
+};
