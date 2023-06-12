@@ -17,6 +17,7 @@ CREATE TABLE userinfo (
   firstName varchar,
   lastName varchar,
   username varchar,
+  email varchar,
   birthday bigint,
   location varchar,
   profile_pic varchar,
