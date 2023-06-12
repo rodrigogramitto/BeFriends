@@ -4,17 +4,17 @@ import logger from 'morgan';
 import path from 'path';
 import router from './routes/routes.js';
 import { fileURLToPath } from 'url';
-import sequelize from '../db/sequelize.js';
+import cors from 'cors';
 
 dotenv.config();
 
 const app = express();
 // const __filename = fileURLToPath(import.meta.url);
 // const __dirname = path.dirname(__filename);
-
+app.use(cors());
 app.use(logger('dev'));
-// app.use(express.static(path.join(__dirname, '../../dist')));
 app.use(express.json());
+
 
 app.use(router);
 

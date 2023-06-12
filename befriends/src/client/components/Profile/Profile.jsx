@@ -3,35 +3,43 @@ import axios from 'axios';
 import ProfileBanner from './ProfileBanner.jsx';
 import Hobbies from './Hobbies.jsx';
 import Feed from './Feed.jsx';
+import { useAuth0 } from '@auth0/auth0-react';
 
 const Profile = () => {
   // will need User from auth0 to retrieve data from server
-
+  const { user } = useAuth0();
   //ProfileBanner needs profile_pic (varchar) and banner_pic (varchar)
 
-  const [user, setUser] = useState({});
+  const [currentUser, setUser] = useState({});
 
   useEffect(() => {
-    axios.get('http://localhost:3000/user')
+    if (user) {
+      axios.get('http://localhost:3000/user', {
+      params: { username: user.nickname }
+    })
     .then((res) => {
       setUser(res)
     })
     .catch((err) => {
       console.error(err);
     })
-  }, [])
+    }
+  }, [user])
 
-  return (
+
+  return user ? (
     <div>
-      <ProfileBanner />
+      <ProfileBanner profilePic={user.picture} />
       <section>
-      <h2>Antonio Perez</h2>
-      <h5>Paris, Tx</h5>
-      <Hobbies />
-      <Feed />
+        <h2>{user.given_name + ' ' + user.family_name}</h2>
+        <h5>Paris, TX</h5>
+        <Hobbies />
+        <Feed />
       </section>
     </div>
-  )
-}
+  ) : (
+    <h1>Loading</h1>
+  );
+};
 
 export default Profile;
