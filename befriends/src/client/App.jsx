@@ -13,7 +13,7 @@ function App() {
   return (
     <>
       <NavBar />
-
+      <Profile />
       {(!isAuthenticated) &&
         <LoginButton />
       }

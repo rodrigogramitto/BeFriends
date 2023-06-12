@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const ProfileBanner = () => {
+const ProfileBanner = ({ profilePic }) => {
   //dummy image
   const profileImg = "https://picsum.photos/id/237/300/300"
 
@@ -9,7 +9,7 @@ const ProfileBanner = () => {
       <p>Banner here</p>
       <div className="avatar">
         <div className="w-24 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
-          <img src={profileImg} alt="Profile image" />
+          <img src={profilePic} alt="Profile image" />
         </div>
       </div>
     </div>
