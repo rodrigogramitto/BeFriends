@@ -1,8 +1,7 @@
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
-
-@import url('https://rsms.me/inter/inter.css');
+@import 'daisyui/dist/full.css';
 
 
 :root {
@@ -42,7 +41,6 @@ a:hover {
 
 body {
   margin: 0;
-  display: flex;
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
