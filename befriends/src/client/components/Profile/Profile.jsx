@@ -14,9 +14,7 @@ const Profile = () => {
 
   useEffect(() => {
     if (user) {
-      axios.get('http://localhost:3000/user', {
-      params: { username: user.nickname }
-    })
+      axios.get(`http://localhost:3000/user/${user.nickname}`)
     .then((res) => {
       setUser(res)
     })
@@ -26,6 +24,7 @@ const Profile = () => {
     }
   }, [user])
 
+  console.log(user);
 
   return user ? (
     <div>
@@ -38,7 +37,7 @@ const Profile = () => {
       </section>
     </div>
   ) : (
-    <h1>Loading</h1>
+    <span className="loading loading-spinner loading-md"></span>
   );
 };
 
