@@ -20,6 +20,18 @@ const Controller = {
     } catch (err) {
       return err.data
     }
+  },
+
+  getMessages: async (chatType, chatId) => {
+    let column = (chatType === 'circle' ? 'circle_chat_id' : 'direct_chat_id')
+    try {
+      const messages = await Model.Messages.findMany({
+        where: {[column]: chatId}
+      })
+      return messages;
+    } catch (err) {
+      return err.data;
+    }
   }
 }
 

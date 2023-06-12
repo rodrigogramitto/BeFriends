@@ -15,6 +15,16 @@ router.get('/user/:username', (req, res) => {
   })
 })
 
+router.get('/chats/:chattype/:chatid', (req, res) => {
+  Controller.getMessages(req.params.chatType, req.params.chatid)
+    .then((messages) => {
+      res.status(200).send(messages);
+    })
+    .catch((err) => {
+      res.status(400).send(err);
+    })
+})
+
 router.post('/user', (req, res) => {
   Controller.addUser(req.body)
   .then(() => {
