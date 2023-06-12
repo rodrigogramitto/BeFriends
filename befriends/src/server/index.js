@@ -4,6 +4,7 @@ import logger from 'morgan';
 import path from 'path';
 import router from './routes/routes.js';
 import { fileURLToPath } from 'url';
+import sequelize from '../db/sequelize.js';
 
 dotenv.config();
 
@@ -14,7 +15,6 @@ const __dirname = path.dirname(__filename);
 app.use(logger('dev'));
 app.use(express.static(path.join(__dirname, '../../index.html')));
 app.use(express.json());
-
 
 app.use('/', router);
 
