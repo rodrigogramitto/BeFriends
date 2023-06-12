@@ -1,6 +1,6 @@
 // tailwind.config.js
 export default {
-  content: ['*.{html, js}'],
+  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
       colors: {
