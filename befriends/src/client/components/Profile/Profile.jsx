@@ -7,6 +7,8 @@ import Feed from './Feed.jsx';
 const Profile = () => {
   // will need User from auth0 to retrieve data from server
 
+  //ProfileBanner needs profile_pic (varchar) and banner_pic (varchar)
+
   const [user, setUser] = useState({});
 
   useEffect(() => {
@@ -28,7 +30,6 @@ const Profile = () => {
       <Hobbies />
       <Feed />
       </section>
-
     </div>
   )
 }

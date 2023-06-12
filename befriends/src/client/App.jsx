@@ -10,16 +10,17 @@ function App() {
 
   return (
     <>
-    <Profile />
-
+      <div className='bg-primary'>
+    <h1 className="text-5xl font-bold underline">
+    Hello world!
+    </h1>
       {(!isAuthenticated) &&
         <LoginButton />
       }
-
-
       {(isAuthenticated) &&
        <LogoutButton />
       }
+      </div>
     </>
   )
 }
