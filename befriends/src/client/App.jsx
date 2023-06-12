@@ -2,7 +2,9 @@ import { useState } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
 import LoginButton from './components/loginButton.jsx';
 import LogoutButton from './components/logoutButton.jsx';
-import Profile from './components/Profile/Profile.jsx';
+import Profile from './components/Profile/Profile/jsx';
+import NavBar from './components/navBar.jsx'
+
 
 function App() {
   const [count, setCount] = useState(0)
@@ -10,10 +12,7 @@ function App() {
 
   return (
     <>
-    <div className='bg-primary'>
-      <h1 className="text-5xl font-bold underline">
-    Hello world!
-    </h1>
+      <NavBar />
       <Profile />
       {(!isAuthenticated) &&
         <LoginButton />
@@ -23,9 +22,8 @@ function App() {
       {(isAuthenticated) &&
        <LogoutButton />
       }
-      </div>
     </>
   )
 }
 
-export default App
+export default App;
