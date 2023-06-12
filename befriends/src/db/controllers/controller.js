@@ -14,11 +14,19 @@ const Controller = {
   },
 
   addUser: async (user) => {
-    console.log(user)
     try {
-      await Model.Userinfo.create(user)
+      const existingUser = await Model.Userinfo.findOne({ where: { username: user.username } });
+
+      if (existingUser) {
+        return "User already exists.";
+      }
+
+      const newUser = await Model.Userinfo.create(user);
+
+      await user.hobbies.forEach((hobby) => Model.Hobbies.create({hobby: hobby, user_id: newUser.id}))
+      return "User succesfully created"
     } catch (err) {
-      return err.data
+      return err.data;
     }
   },
 

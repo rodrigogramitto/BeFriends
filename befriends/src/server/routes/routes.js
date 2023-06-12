@@ -27,8 +27,8 @@ router.get('/chats/:chattype/:chatid', (req, res) => {
 
 router.post('/user', (req, res) => {
   Controller.addUser(req.body)
-  .then(() => {
-    res.sendStatus(201)
+  .then((data) => {
+    res.send(data)
   })
   .catch((err) => {
     res.send(err.data);
