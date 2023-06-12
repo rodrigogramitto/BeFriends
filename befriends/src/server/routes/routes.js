@@ -15,4 +15,14 @@ router.get('/user/:username', (req, res) => {
   })
 })
 
+router.post('/user', (req, res) => {
+  Controller.addUser(req.body)
+  .then(() => {
+    res.sendStatus(201)
+  })
+  .catch((err) => {
+    res.send(err.data);
+  })
+})
+
 export default router;

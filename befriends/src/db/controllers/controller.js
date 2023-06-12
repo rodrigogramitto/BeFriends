@@ -11,6 +11,15 @@ const Controller = {
     } catch (err) {
       return err.data
     }
+  },
+
+  addUser: async (user) => {
+    console.log(user)
+    try {
+      Model.Userinfo.create(user)
+    } catch (err) {
+      return err.data
+    }
   }
 }
 
