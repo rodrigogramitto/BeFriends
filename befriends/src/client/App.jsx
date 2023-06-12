@@ -6,7 +6,6 @@ import Questionnaire from './components/Questionnaire.jsx';
 import Profile from './components/Profile/Profile.jsx';
 import NavBar from './components/navBar.jsx'
 
-
 function App() {
   const [count, setCount] = useState(0)
   const { isAuthenticated } = useAuth0()
@@ -30,4 +29,4 @@ function App() {
   )
 }
 
-export default App;
+export default App
