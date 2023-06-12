@@ -136,3 +136,12 @@ Profile
 .profile-info {
   position: fixed;
 }
+
+/*==============================================================
+Profile
+===============================================================*/
+
+.navbar {
+  background-color: var(--color-secondary);
+  color:#1a1a1a
+}
