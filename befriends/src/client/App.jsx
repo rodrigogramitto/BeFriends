@@ -8,7 +8,7 @@ import NavBar from './components/navBar.jsx';
 import MyCalendar from './components/Calendar';
 import axios from 'axios';
 import DiscoverMode from './components/Discover/discoverMode.jsx';
-import Chat from './components/Chat.jsx';
+import FriendCircle from './components/FriendCircle/friendCircle.jsx';
 
 function App() {
   const { isAuthenticated } = useAuth0()
