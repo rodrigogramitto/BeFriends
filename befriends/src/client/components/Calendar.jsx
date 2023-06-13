@@ -1,7 +1,8 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffectß } from 'react';
 import { Calendar, momentLocalizer } from 'react-big-calendar';
 import moment from 'moment';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
+import axios from 'axios';
 
 const localizer = momentLocalizer(moment);
 const events = [
@@ -12,10 +13,14 @@ const events = [
 
 const MyCalendar = () => {
   const [displayEvent, toggleDisplay] = useState(false);
+  const [userEvents, setUserEvents] = useState(events);
   const EventName = useRef('');
   const StartDate = useRef('');
   const EndDate = useRef('');
 
+  useEffect(() => {
+    axios
+  }, [])
   const displayEventModal = () => {
     toggleDisplay(true);
   };
@@ -26,12 +31,18 @@ const MyCalendar = () => {
 
   const submitEvent = (e) => {
     e.preventDefault();
-    const start = new Date(StartDate.current.value)
     const newEvent = {}
     newEvent.name = EventName.current.value;
-    newEvent.start = new Date(StartDate.current.value);
-    newEvent.end = new Date(EndDate.current.value);
-    console.log('New Event:', newEvent);
+    newEvent.start_date = new Date(StartDate.current.value).getTime();
+    newEvent.end_date = new Date(EndDate.current.value).getTime();
+    console.log(newEvent);
+    axios.post('http://localhost:3000/event', newEvent)
+    .then((res) => {
+      setUserEvents(userEvents.concat(res.data))
+    })
+    .catch((err) => {
+      console.error(err);
+    })
   }
 
   return (
