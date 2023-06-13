@@ -1,10 +1,10 @@
 import {useEffect, useState} from 'react';
 import axios from "axios";
-// import io from 'socket.io';
+import { io } from "socket.io-client";
 
 //parameters: "circle" || "direct", id for either circle or direct, current user id
 //need to figure out if we have username or userId
-function Chat(chatType, chatId, userId) {
+function Chat({chatType, chatId, userId}) {
 // const socket = io();
 // socket.on('message', message => {
 //   console.log(message);
@@ -23,8 +23,8 @@ function Chat(chatType, chatId, userId) {
   const usernames = {};
 
   useEffect(() => {
-    axios.get(`/chats/${chatType}/${chatId}`)
-      .then((results) => setMessages(results))
+    axios.get(`http://localhost:3001/chats/${chatType}/${chatId}`)
+      .then((results) => setMessages(results.data))
       .catch((err) => console.log('error getting messages', err));
   }, []);
 
@@ -44,6 +44,7 @@ if (messages.length === 0) {
             console.log('other person message', message.message)
           }
         })}
+        <div>Messages printed to console</div>
       </>
     )
   }
