@@ -11,20 +11,26 @@ const Profile = () => {
   //ProfileBanner needs profile_pic (varchar) and banner_pic (varchar)
 
   const [currentUser, setUser] = useState({});
+  const [userHobbies, setUserHobbies] = useState({});
 
   useEffect(() => {
-    if (user) {
-      axios.get(`http://localhost:3000/user/${user.nickname}`)
-    .then((res) => {
-      setUser(res)
-    })
-    .catch((err) => {
-      console.error(err);
-    })
-    }
-  }, [user])
+    const fetchData = async () => {
+      if (user) {
+        try {
+          const retrievedUser = await axios.get(`http://localhost:3000/user/${user.nickname}`);
+          const hobbies = await axios.get(`http://localhost:3000/user/${retrievedUser.id}`)
+          setUser(retrievedUser.data);
+          setUserHobbies(hobbies);
+        } catch (err) {
+          console.error(err);
+        }
+      }
+    };
 
-  console.log(user);
+    fetchData();
+  }, [user]);
+
+  console.log('current User:', currentUser);
 
   return user ? (
     <div>
@@ -32,7 +38,7 @@ const Profile = () => {
       <section>
         <h2>{user.given_name + ' ' + user.family_name}</h2>
         <h5>Paris, TX</h5>
-        <Hobbies />
+        <Hobbies userHobbies={userHobbies} />
         <Feed />
       </section>
     </div>

@@ -1,6 +1,7 @@
 import Model from '../models/index.js';
 
 const Controller = {
+
   getUser: async (username) => {
     console.log(username);
     try {
@@ -52,7 +53,7 @@ const Controller = {
     } catch (err) {
       return err
     }
-  }
+  },
 }
 
 export default Controller;
