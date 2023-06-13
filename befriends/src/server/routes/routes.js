@@ -30,7 +30,7 @@ router.post('/user', (req, res) => {
     res.send(data)
   })
   .catch((err) => {
-    res.send(err.data);
+    res.send(err);
   })
 })
 
