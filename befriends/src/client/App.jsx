@@ -8,6 +8,7 @@ import NavBar from './components/navBar.jsx';
 import MyCalendar from './components/Calendar';
 import axios from 'axios';
 import DiscoverMode from './components/Discover/discoverMode.jsx';
+import FriendCircle from './components/FriendCircle/friendCircle.jsx';
 
 function App() {
   const { isAuthenticated } = useAuth0()
@@ -38,7 +39,7 @@ function App() {
     0: <Questionnaire viewSwitcher={viewSwitcher} />,
     1: <Profile viewSwitcher={viewSwitcher} user={user} currentUser={currentUser} />,
     2: <DiscoverMode />,
-    3: <h1>FriendCircle</h1>,
+    3: <FriendCircle />,
     4: <MyCalendar />
   }
   return (
