@@ -46,18 +46,17 @@ export default function Questionnaire({ viewSwitcher }) {
 
     let body = {
       firstname: user.given_name,
-      lastName: user.family_name,
+      lastname: user.family_name,
       username: user.nickname,
       email: user.email,
       birthday: formattedBirthdayString,
       location: `${cityInput.current.value}, ${stateInput.current.value}`,
       profile_pic: user.picture,
-      banner_pic: "placeholder text",
-      hobby: hobbyTags.concat(interestTags),
+      banner_pic: "placeholder",
+      hobbies: hobbyTags.concat(interestTags),
     };
 
-    axios
-      .post("/postUser", body)
+    axios.post('http://localhost:3000/user', body)
       .then((response) => {
         console.log(response);
         viewSwitcher(1);
