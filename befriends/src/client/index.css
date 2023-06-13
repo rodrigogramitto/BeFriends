@@ -89,24 +89,88 @@ button:focus-visible {
 Questionnaire
 ===============================================================*/
 
-/* .questionnaire-form-content {
+.questionnaire-form-modal {
+  align-items: center;
+  background-color: var(--color-primary);
+  bottom: 0;
+  cursor: default;
   display: flex;
-  flex-direction: column;
-  background-color: #25A18E;
-  border-radius: 3px;
-  padding: 1em;
-} */
+  justify-content: center;
+  left: 0;
+  position: fixed;
+  right: 0;
+  top: 0;
+  z-index: 1;
+}
 
-/*
+.questionnaire-form-content {
+  background-color: var(--color-secondary);
+  border-radius: 5%;
+  width: 50vw;
+}
+
+.questionnaire-form-title,
+.questionnaire-form-subtitle {
+  margin: 0;
+  color: white;
+}
+
+.questionnaire-form-header,
+.questionnaire-form-footer {
+  display: flex;
+  justify-content: center;
+  padding: 0.6em;
+}
+
+.questionnaire-form-header {
+  border-bottom: 0.06em solid white;
+}
+
+.questionnaire-form-hobby,
+.questionnaire-form-interest  {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.questionnaire-form-interest  {
+  margin-bottom: 1em;
+}
+
+.questionnaire-form-footer {
+  border-top: 0.06em solid white;
+}
+
+.questionnaire-form-body {
+  padding: 0.6em;
+}
+
 .questionnaire-form-input {
   align-items: center;
   display: flex;
-  justify-content: space-between;
+  flex-direction: row;
+  margin: 0.5em 1em;
 }
 
-.questionnaire-form-input h6{
-  margin: 1em;
-} */
+.questionnaire-form-input h6 {
+  color: white;
+  margin-right: 1em;
+}
+
+.questionnaire-form-modal button{
+  background-color: var(--color-accent);
+  color: white;
+}
+
+.questionnaire-form-input button {
+  color: white;
+  margin-left: 1em;
+}
+
+.address-input {
+  margin-left: 1em;
+}
+
 
 .tag {
   border-radius: 8px;
@@ -163,7 +227,7 @@ Discover Mode
 }
 
 .photo{
-  width: 40%; 
+  width: 40%;
   height: auto;
 }
 
