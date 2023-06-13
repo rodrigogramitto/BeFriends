@@ -15,9 +15,9 @@ router.get('/user/:username', (req, res) => {
 })
 
 router.get('/chats/:chattype/:chatid', (req, res) => {
-  Controller.getMessages(req.params.chatType, req.params.chatid)
+  Controller.getMessages(req.params.chattype, req.params.chatid)
     .then((messages) => {
-      res.status(200).send(messages);
+      res.status(200).send(messages[0]);
     })
     .catch((err) => {
       res.status(400).send(err);
