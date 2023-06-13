@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import axios from "axios";
 import { useAuth0 } from "@auth0/auth0-react";
 import PropTypes from "prop-types";
@@ -56,7 +56,8 @@ export default function Questionnaire({ viewSwitcher }) {
       hobbies: hobbyTags.concat(interestTags),
     };
 
-    axios.post('http://localhost:3000/user', body)
+    axios
+      .post("http://localhost:3000/user", body)
       .then((response) => {
         console.log(response);
         viewSwitcher(1);
