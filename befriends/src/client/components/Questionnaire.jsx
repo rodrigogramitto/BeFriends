@@ -40,22 +40,24 @@ export default function Questionnaire({ viewSwitcher }) {
   const submitUserInfo = (e) => {
     e.preventDefault();
 
+    const formattedBirthdayString = birthdayInput.current.value.split("-").join("");
+
     let body = {
       firstname: user.given_name,
       lastName: user.family_name,
       username: user.nickname,
       email: user.email,
-      birthday: birthdayInput.current.value,
+      birthday: formattedBirthdayString,
       location: `${cityInput.current.value}, ${stateInput.current.value}`,
       profile_pic: user.picture,
       banner_pic: "placeholder text",
       hobby: hobbyTags.concat(interestTags)
-    }
+    };
 
     axios
       .post('/postUser', body)
       .then((response) => {
-        console.log(response)
+        console.log(response);
         viewSwitcher(1);
       })
       .catch((err) => console.error(err));
