@@ -45,4 +45,14 @@ router.get('/hobbies/:user_id', (req, res) => {
   // res.send(req.params);
 })
 
+router.get('/friends/:user_id', (req, res) => {
+  Controller.getFriends(req.params.user_id)
+  .then((friends) => {
+    res.send(friends)
+  })
+  .catch((err) => {
+    res.send(err);
+  })
+})
+
 export default router;

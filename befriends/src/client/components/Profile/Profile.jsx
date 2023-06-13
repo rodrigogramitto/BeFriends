@@ -7,7 +7,28 @@ import { useAuth0 } from '@auth0/auth0-react';
 
 const Profile = ( { user, currentUser } ) => {
 
+  const [userHobbies, setUserHobbies] = useState([]);
+  const [userFriends, setUserFriends] = useState([]);
+
   //ProfileBanner needs profile_pic (varchar) and banner_pic (varchar)
+  useEffect(() => {
+    if (currentUser) {
+      axios.get(`http://localhost:3000/hobbies/${currentUser.id}`)
+      .then((res) => {
+        setUserHobbies(res.data)
+      })
+      .catch((err) => {
+        console.error(err)
+      })
+      axios.get(`http://localhost:3000/friends/${currentUser.id}`)
+      .then((res) => {
+        setUserFriends(res.data)
+      })
+      .catch((err) => {
+        console.error(err)
+      })
+    }
+  }, [user, currentUser])
 
   return user ? (
     <div>
@@ -15,7 +36,7 @@ const Profile = ( { user, currentUser } ) => {
       <section>
         <h2>{user.given_name + ' ' + user.family_name}</h2>
         <h5>Paris, TX</h5>
-        <Hobbies />
+        <Hobbies userHobbies={userHobbies} userFriends={userFriends} />
         <Feed />
       </section>
     </div>

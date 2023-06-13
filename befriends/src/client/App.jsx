@@ -25,7 +25,7 @@ function App() {
     if (user) {
       axios.get(`http://localhost:3000/user/${user.nickname}`)
     .then((res) => {
-      setCurrentUser(res)
+      setCurrentUser(res.data)
     })
     .catch((err) => {
       console.error(err);
