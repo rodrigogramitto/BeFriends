@@ -13,7 +13,7 @@ import Chat from './components/Chat.jsx';
 
 function App() {
   const { isAuthenticated } = useAuth0()
-  const [currentView, setCurrentView] = useState(0);
+  const [currentView, setCurrentView] = useState(4);
   const viewSwitcher = (num) => {
     setCurrentView(num);
   }

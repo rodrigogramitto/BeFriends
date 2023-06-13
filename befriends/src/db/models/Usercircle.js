@@ -16,7 +16,6 @@ const UserCircle = sequelize.define(
     },
     circle_id: {
       type: DataTypes.INTEGER,
-      allowNull: false
     }
   }
 )
