@@ -1,14 +1,27 @@
 import {useEffect, useState} from 'react';
 import axios from "axios";
-import { io } from "socket.io-client";
+import io from "socket.io-client";
 
 //parameters: "circle" || "direct", id for either circle or direct, current user id
 //need to figure out if we have username or userId
 function Chat({chatType, chatId, userId}) {
-// const socket = io();
-// socket.on('message', message => {
-//   console.log(message);
-// })
+const socket = io("http://localhost:3000");
+socket.on('message', message => {
+  console.log(message);
+})
+
+const [text, setText] = useState('');
+
+const handleTextChange = (event) => {
+  const { value } = event.target;
+  setText(value);
+};
+
+const handleSendClick = () => {
+  socket.emit('message', text);
+  setText('');
+};
+
 
   //get all messages with the circle or direct id
     //ideally we would just pull the most recent 50, then load as needed, but for mvp can pull all
@@ -20,10 +33,10 @@ function Chat({chatType, chatId, userId}) {
 
   const [messages, setMessages] = useState([]);
 
-  const usernames = {};
+
 
   useEffect(() => {
-    axios.get(`http://localhost:3001/chats/${chatType}/${chatId}`)
+    axios.get(`http://localhost:3000/chats/${chatType}/${chatId}`)
       .then((results) => setMessages(results.data))
       .catch((err) => console.log('error getting messages', err));
   }, []);
@@ -37,14 +50,15 @@ if (messages.length === 0) {
   )} else {
     return (
       <>
-        {messages.map((message) => {
+        {messages.map((message, index) => {
           if (message.user_id === userId) {
-            console.log('user message', message.message);
+            return (<div key={index}>user message: {message.message}</div>)
           } else {
-            console.log('other person message', message.message)
+            return (<div key={index}>other person message: {message.message}</div>)
           }
         })}
-        <div>Messages printed to console</div>
+        <input type="text" placeholder="Type here" className="input input-bordered w-full max-w-xs" value={text} onChange={handleTextChange}/>
+        <button className="btn" onClick={handleSendClick}>Submit which does not submit yet</button>
       </>
     )
   }

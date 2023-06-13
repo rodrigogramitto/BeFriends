@@ -12,7 +12,12 @@ dotenv.config();
 
 const app = express();
 const server = http.createServer(app);
-const io = new Server(server,  { cors: { origin: '*' } });
+const io = new Server(server, {
+  cors: {
+    origin: ["http://localhost:3001", "http://localhost:5173", "http://localhost:3000"],
+    methods: ["GET", "POST"]
+  }
+});
 // const __filename = fileURLToPath(import.meta.url);
 // const __dirname = path.dirname(__filename);
 app.use(cors());
@@ -23,7 +28,6 @@ app.use(express.json());
 app.use(router);
 
 io.on('connection', socket => {
-  console.log('New socket connection');
   socket.emit('message', 'This is a chat');
 })
 
