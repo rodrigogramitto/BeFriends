@@ -14,11 +14,19 @@ const Controller = {
   },
 
   addUser: async (user) => {
-    console.log(user)
     try {
-      await Model.Userinfo.create(user)
+      const existingUser = await Model.Userinfo.findOne({ where: { username: user.username } });
+
+      if (existingUser) {
+        return "User already exists.";
+      }
+
+      const newUser = await Model.Userinfo.create(user);
+
+      await user.hobbies.forEach((hobby) => Model.Hobbies.create({hobby: hobby, user_id: newUser.id}))
+      return "User succesfully created"
     } catch (err) {
-      return err.data
+      return err.data;
     }
   },
 
@@ -31,6 +39,18 @@ const Controller = {
       return messages;
     } catch (err) {
       return err.data;
+    }
+  },
+
+  getHobbies: async (userId) => {
+    console.log(userId)
+    try {
+      const hobbies = await Model.Hobbies.findAll(
+        { where: {user_id: userId},
+        attributes: ['hobby']})
+      return hobbies;
+    } catch (err) {
+      return err
     }
   }
 }
