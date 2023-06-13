@@ -56,7 +56,8 @@ export default function Questionnaire({ viewSwitcher }) {
       hobbies: hobbyTags.concat(interestTags),
     };
 
-    axios.post('http://localhost:3000/user', body)
+    axios
+      .post("http://localhost:3000/user", body)
       .then((response) => {
         console.log(response);
         viewSwitcher(1);
