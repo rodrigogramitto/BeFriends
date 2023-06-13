@@ -83,8 +83,8 @@ const Controller = {
         return "Event already exists."
       }
 
-      await Model.Events.create(event)
-      return "Event succesfully created"
+      const newEvent = await Model.Events.create(event)
+      return newEvent;
     } catch (err) {
       console.error(err);
       return "Error ocurred while saving event.";
@@ -99,7 +99,7 @@ const Controller = {
       console.error(err)
       return "Error retrieving events."
     }
-  }
+  },
 }
 
 export default Controller;

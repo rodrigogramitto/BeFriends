@@ -57,8 +57,8 @@ router.get('/friends/:user_id', (req, res) => {
 
 router.post('/event', (req, res) => {
   Controller.addEvent(req.body)
-  .then(() => {
-    res.sendStatus(201)
+  .then((data) => {
+    res.send(data)
   })
   .catch((err) => {
     res.send(err)

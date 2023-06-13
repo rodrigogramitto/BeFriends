@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffectß } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Calendar, momentLocalizer } from 'react-big-calendar';
 import moment from 'moment';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
@@ -19,7 +19,17 @@ const MyCalendar = () => {
   const EndDate = useRef('');
 
   useEffect(() => {
-    axios
+    axios.get('http://localhost:3000/event')
+    .then((events) => {
+      let parsed = events.data.map((event) => ({ title: event.name, start: new Date(Number(event.start_date)), end: new Date(Number(event.end_date)) }));
+      setUserEvents(userEvents.concat(parsed))
+      EventName.current.value = '';
+      StartDate.current.value = '';
+      EndDate.current.value = '';
+    })
+    .catch((err) => {
+      console.error(err)
+    })
   }, [])
   const displayEventModal = () => {
     toggleDisplay(true);
@@ -29,26 +39,30 @@ const MyCalendar = () => {
     toggleDisplay(false);
   };
 
-  const submitEvent = (e) => {
-    e.preventDefault();
+  const submitEvent = () => {
     const newEvent = {}
     newEvent.name = EventName.current.value;
     newEvent.start_date = new Date(StartDate.current.value).getTime();
     newEvent.end_date = new Date(EndDate.current.value).getTime();
-    console.log(newEvent);
     axios.post('http://localhost:3000/event', newEvent)
     .then((res) => {
-      setUserEvents(userEvents.concat(res.data))
+      let event = {}
+      event.title = res.data.name;
+      event.start = new Date(Number(res.data.start_date));
+      event.end = new Date(Number(res.data.end_date));
+      setUserEvents(userEvents.concat(event))
     })
     .catch((err) => {
       console.error(err);
-    })
+    });
+    closeEventModal();
   }
 
+  console.log(userEvents)
   return (
     <div>
       <Calendar
-        events={events}
+        events={userEvents}
         localizer={localizer}
         startAccessor="start"
         endAccessor="end"
