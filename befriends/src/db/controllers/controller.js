@@ -28,6 +28,7 @@ const Controller = {
       await user.hobbies.forEach((hobby) => Model.Hobbies.create({hobby: hobby, user_id: newUser.id}))
       return "User succesfully created"
     } catch (err) {
+      console.log(err);
       return err.data;
     }
   },
