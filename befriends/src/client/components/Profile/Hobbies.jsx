@@ -3,9 +3,9 @@ import react from 'react';
 const dummyHobbies = ['Jousting', 'Holding Computers', 'Fly Fishing', 'Spelunking'];
 const dummyFriends = [`Peter L'Anguile`, 'John the Pokemon', 'Imogen Heap'];
 
-const Hobbies = ({ userHobbies }) => {
+const Hobbies = ({ userHobbies, userFriends }) => {
 
-  console.log(userHobbies)
+  console.log(userFriends);
 
   return (
     userHobbies ?
@@ -19,7 +19,7 @@ const Hobbies = ({ userHobbies }) => {
     <div>
       <h4 className="card-title">Bess Frenz</h4>
       <ul>
-        {dummyFriends.map((friend, key) => (<li key={key}>{friend}</li>))}
+        {userFriends.map((friend, key) => (<li key={key}>{friend.firstname + ' ' + friend.lastname}</li>))}
       </ul>
     </div>
     </div> : <span className="loading loading-spinner loading-md"></span>

@@ -44,7 +44,6 @@ const Controller = {
   },
 
   getHobbies: async (userId) => {
-    console.log(userId)
     try {
       const hobbies = await Model.Hobbies.findAll(
         { where: {user_id: userId},
@@ -54,6 +53,26 @@ const Controller = {
       return err
     }
   },
+
+  getFriends: async (userId) => {
+    try {
+      const friends = await Model.Friend.findAll({
+        include: [
+          {
+            model: Model.Userinfo,
+            attributes: ['firstname', 'lastname']
+          }
+        ],
+        where: { user_id: userId },
+        attributes: ['user_id']
+      });
+      return friends.map((friend) => {
+        return {firstname: friend.userinfo.firstname, lastname: friend.userinfo.lastname}
+      })
+    } catch (err) {
+      return err.data;
+    }
+  }
 }
 
 export default Controller;
