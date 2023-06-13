@@ -5,6 +5,7 @@ import LogoutButton from './components/logoutButton.jsx';
 import Questionnaire from './components/Questionnaire.jsx';
 import Profile from './components/Profile/Profile.jsx';
 import NavBar from './components/navBar.jsx'
+import MyCalendar from './components/Calendar'
 import DiscoverMode from './components/Discover/discoverMode.jsx';
 
 function App() {
@@ -20,7 +21,8 @@ function App() {
     0: <Questionnaire viewSwitcher={viewSwitcher} />,
     1: <Profile viewSwitcher={viewSwitcher} />,
     2: <DiscoverMode />,
-    3: <h1>FriendCircle</h1>
+    3: <h1>FriendCircle</h1>,
+    4: <MyCalendar />
   }
   return (
     <>
