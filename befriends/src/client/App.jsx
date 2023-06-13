@@ -9,6 +9,7 @@ import MyCalendar from './components/Calendar';
 import axios from 'axios';
 import DiscoverMode from './components/Discover/discoverMode.jsx';
 import FriendCircle from './components/FriendCircle/friendCircle.jsx';
+import Chat from './components/Chat.jsx';
 
 function App() {
   const { isAuthenticated } = useAuth0()
@@ -39,7 +40,7 @@ function App() {
     0: <Questionnaire viewSwitcher={viewSwitcher} />,
     1: <Profile viewSwitcher={viewSwitcher} user={user} currentUser={currentUser} />,
     2: <DiscoverMode />,
-    3: <FriendCircle />,
+    // 3: <Chat chatType={1} chatId={1} userId={1} />,
     4: <MyCalendar />
   }
   return (
