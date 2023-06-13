@@ -1,4 +1,5 @@
 import Model from '../models/index.js';
+import sequelize from '../sequelize.js';
 
 const Controller = {
   getUser: async (username) => {
@@ -31,11 +32,10 @@ const Controller = {
   },
 
   getMessages: async (chatType, chatId) => {
-    let column = (chatType === 'circle' ? 'circle_chat_id' : 'direct_chat_id')
+    let column = (chatType ? 'circle_chat_id' : 'direct_chat_id')
+    console.log(column)
     try {
-      const messages = await Model.Messages.findMany({
-        where: {[column]: chatId}
-      })
+      const messages = await sequelize.query(`SELECT * FROM message WHERE message.${column} = ${chatId};`)
       return messages;
     } catch (err) {
       return err.data;

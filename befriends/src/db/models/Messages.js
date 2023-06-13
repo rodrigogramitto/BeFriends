@@ -28,6 +28,9 @@ const Messages = sequelize.define(
       type: DataTypes.BIGINT,
       allowNull: false,
     },
+  },
+  {
+    freezeTableName: true
   }
 )
 
