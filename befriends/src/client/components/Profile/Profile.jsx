@@ -5,32 +5,16 @@ import Hobbies from './Hobbies.jsx';
 import Feed from './Feed.jsx';
 import { useAuth0 } from '@auth0/auth0-react';
 
-const Profile = () => {
-  // will need User from auth0 to retrieve data from server
-  const { user } = useAuth0();
+const Profile = ( { user, currentUser } ) => {
+
   //ProfileBanner needs profile_pic (varchar) and banner_pic (varchar)
-
-  const [currentUser, setUser] = useState({});
-  const [userHobbies, setUserHobbies] = useState({});
-
   useEffect(() => {
-    const fetchData = async () => {
-      if (user) {
-        try {
-          const retrievedUser = await axios.get(`http://localhost:3000/user/${user.nickname}`);
-          const hobbies = await axios.get(`http://localhost:3000/user/${retrievedUser.id}`)
-          setUser(retrievedUser.data);
-          setUserHobbies(hobbies);
-        } catch (err) {
-          console.error(err);
-        }
-      }
-    };
+    if (currentUser) {
+      axios.get('/hobbies', currentUser.id)
+      console.log(currentUser);
+    }
+  }, [])
 
-    fetchData();
-  }, [user]);
-
-  console.log('current User:', currentUser);
 
   return user ? (
     <div>
