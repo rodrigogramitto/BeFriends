@@ -3,11 +3,9 @@ import sequelize from '../sequelize.js';
 
 const Events = sequelize.define(
   'events', {
-    id: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      primaryKey: true,
-      autoincrement: true
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false
     },
     start_date: {
       type: DataTypes.BIGINT,
@@ -19,8 +17,11 @@ const Events = sequelize.define(
     },
     circle_id: {
       type: DataTypes.INTEGER,
-      allowNull: false,
     }
+  },
+  {
+    freezetable: true,
+    timestamps: false
   }
 )
 
