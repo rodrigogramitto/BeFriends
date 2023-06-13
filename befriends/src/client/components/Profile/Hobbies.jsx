@@ -3,23 +3,26 @@ import react from 'react';
 const dummyHobbies = ['Jousting', 'Holding Computers', 'Fly Fishing', 'Spelunking'];
 const dummyFriends = [`Peter L'Anguile`, 'John the Pokemon', 'Imogen Heap'];
 
-const Hobbies = () => {
+const Hobbies = ({ userHobbies, userFriends }) => {
+
+  console.log(userFriends);
 
   return (
+    userHobbies ?
     <div >
     <div>
       <h4 className="card-title">Hobbies</h4>
     <ul>
-      {dummyHobbies.map((hobby, key) => (<li key={key}>{hobby}</li>))}
+      {userHobbies.map((hobby, key) => (<li key={key}>{hobby.hobby}</li>))}
     </ul>
     </div>
     <div>
       <h4 className="card-title">Bess Frenz</h4>
       <ul>
-        {dummyFriends.map((friend, key) => (<li key={key}>{friend}</li>))}
+        {userFriends.map((friend, key) => (<li key={key}>{friend.firstname + ' ' + friend.lastname}</li>))}
       </ul>
     </div>
-    </div>
+    </div> : <span className="loading loading-spinner loading-md"></span>
   )
 }
 
