@@ -24,5 +24,3 @@ const ChatBrowser = () => {
 
 export default ChatBrowser
 
-//<a className="tab tab-lifted tab-active">Browser</a>
-//<a className="tab tab-lifted">Chat</a>
