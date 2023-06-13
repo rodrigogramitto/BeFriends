@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 const Browser = () => {
-  const friendCircles = ["Horses", "Painting", "Soccer", "Basketball", "Puzzles", "Video Games", "fffffff", "dddddddddd", "ggggggggggggg", "hhhhhhhhhhh"];
+  const friendCircles = ["Horses", "Painting", "Soccer", "Basketball", "Puzzles", "Video Games", "Reading", "Kardashians", "Tik-Tok", "Self Development", "Programming"];
 
   const [searchCircles, setSearchCircles] = useState(friendCircles);
 
@@ -20,7 +20,7 @@ const Browser = () => {
   return (
     <div className="flex flex-col">
         <div>
-        <input type="text" placeholder="Search" onChange={(e)=>handleChange(e)} className="input input-bordered w-full max-w-xs" />
+        <input type="text" placeholder="Search" onChange={(e)=>handleChange(e)} className="input input-bordered m-4 w-full max-w-xs" />
         </div>
         <div className="flex-wrap">
           {searchCircles.map((circle, i) => {
