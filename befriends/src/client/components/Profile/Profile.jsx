@@ -7,14 +7,20 @@ import { useAuth0 } from '@auth0/auth0-react';
 
 const Profile = ( { user, currentUser } ) => {
 
+  const [userHobbies, setUserHobbies] = useState([]);
+
   //ProfileBanner needs profile_pic (varchar) and banner_pic (varchar)
   useEffect(() => {
     if (currentUser) {
-      axios.get('/hobbies', currentUser.id)
-      console.log(currentUser);
+      axios.get(`http://localhost:3000/hobbies/${currentUser.id}`)
+      .then((res) => {
+        setUserHobbies(res.data)
+      })
+      .catch((err) => {
+        console.error(err)
+      })
     }
-  }, [])
-
+  }, [user, currentUser])
 
   return user ? (
     <div>
