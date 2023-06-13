@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { Calendar, momentLocalizer } from 'react-big-calendar';
 import moment from 'moment';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
@@ -11,31 +11,31 @@ const events = [
 ];
 
 const MyCalendar = () => {
-  const [showEventForm, setShowEventForm] = useState(false);
-  const [selectedDate, setSelectedDate] = useState(null);
+  const [displayEvent, toggleDisplay] = useState(false);
+  const EventName = useRef('');
+  const StartDate = useRef('');
+  const EndDate = useRef('');
 
-  const handleAddEventClick = (date) => {
-    setSelectedDate(date);
-    setShowEventForm(true);
+  const displayEventModal = () => {
+    toggleDisplay(true);
   };
 
-  const handleEventFormClose = () => {
-    setShowEventForm(false);
-    setSelectedDate(null);
+  const closeEventModal = () => {
+    toggleDisplay(false);
   };
 
-  const handleEventFormSubmit = (eventData) => {
-    // Handle event submission (e.g., saving to a database)
-    console.log('Event data:', eventData);
-    setShowEventForm(false);
-    setSelectedDate(null);
-  };
+  const submitEvent = (e) => {
+    e.preventDefault();
+    const start = new Date(StartDate.current.value)
+    const newEvent = {}
+    newEvent.name = EventName.current.value;
+    newEvent.start = new Date(StartDate.current.value);
+    newEvent.end = new Date(EndDate.current.value);
+    console.log('New Event:', newEvent);
+  }
 
   return (
     <div>
-      <div>
-        <button onClick={() => handleAddEventClick(new Date())}>Add Event</button>
-      </div>
       <Calendar
         events={events}
         localizer={localizer}
@@ -43,47 +43,18 @@ const MyCalendar = () => {
         endAccessor="end"
         style={{ height: 500 }}
       />
-      {showEventForm && (
-        <EventForm
-          date={selectedDate}
-          onClose={handleEventFormClose}
-          onSubmit={handleEventFormSubmit}
-        />
-      )}
-    </div>
-  );
-};
 
-const EventForm = ({ date, onClose, onSubmit }) => {
-  const [eventTitle, setEventTitle] = useState('');
+      <button className="btn" onClick={displayEventModal}>Add Event</button>
+      <dialog id="my_modal_3" className="modal" open={displayEvent}>
+        <form method="dialog" className="modal-box">
+          <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" onClick={closeEventModal}>✕</button>
+          <input placeholder="Event Name" ref={EventName} /> <br />
+          <label>StartDate <br /><input type="date" ref={StartDate} /></label>
+          <label>End Date <br /><input placeholder="End Date" type="date" ref={EndDate} /></label>
+          <button type="button" className="btn" onClick={submitEvent}>Add!</button>
 
-  const handleTitleChange = (event) => {
-    setEventTitle(event.target.value);
-  };
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const eventData = {
-      title: eventTitle,
-      start: date,
-      end: date,
-    };
-    onSubmit(eventData);
-  };
-
-  return (
-    <div>
-      <h3>Add Event</h3>
-      <p>Date: {date.toDateString()}</p>
-      <form onSubmit={handleSubmit}>
-        <label>
-          Event Title:
-          <input type="text" value={eventTitle} onChange={handleTitleChange} />
-        </label>
-        <br />
-        <button type="submit">Save</button>
-        <button type="button" onClick={onClose}>Cancel</button>
-      </form>
+        </form>
+      </dialog>
     </div>
   );
 };

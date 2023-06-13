@@ -11,6 +11,8 @@ Model.Userinfo.create({
     banner_pic: "bannerpictureurl",
 })
 
+
+
 // id serial PRIMARY KEY,
 //   firstName varchar,
 //   lastName varchar,
