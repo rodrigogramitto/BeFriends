@@ -4,12 +4,6 @@ import sequelize from '../sequelize.js';
 
 const Friend = sequelize.define(
     'friend', {
-      id: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        primaryKey: true,
-        autoincrement: true
-      },
       user_id: {
         type: DataTypes.INTEGER,
         allowNull: false,
@@ -18,6 +12,10 @@ const Friend = sequelize.define(
         type: DataTypes.INTEGER,
         allowNull: false,
       }
+    },
+    {
+      freezeTableName: true,
+      timestamps: false,
     }
   )
 
