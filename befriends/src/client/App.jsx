@@ -38,7 +38,7 @@ function App() {
     0: <Questionnaire viewSwitcher={viewSwitcher} />,
     1: <Profile viewSwitcher={viewSwitcher} user={user} currentUser={currentUser} />,
     2: <DiscoverMode />,
-    3: <h1>FriendCircle</h1>,
+    // 3: <Chat chatType={1} chatId={1} userId={1} />,
     4: <MyCalendar />
   }
   return (
