@@ -5,7 +5,6 @@ import Controller from '../../db/controllers/controller.js';
 const router = express.Router({ mergeParams: true });
 
 router.get('/user/:username', (req, res) => {
-  // console.log(req.params);
   Controller.getUser(req.params)
   .then((user) => {
     res.send(user)
@@ -33,6 +32,17 @@ router.post('/user', (req, res) => {
   .catch((err) => {
     res.send(err.data);
   })
+})
+
+router.get('/hobbies/:user_id', (req, res) => {
+  Controller.getHobbies(req.params.user_id)
+  .then((hobbies) => {
+    res.send(hobbies)
+  })
+  .catch((err) => {
+    res.send(err.data)
+  })
+  // res.send(req.params);
 })
 
 export default router;

@@ -40,6 +40,18 @@ const Controller = {
     } catch (err) {
       return err.data;
     }
+  },
+
+  getHobbies: async (userId) => {
+    console.log(userId)
+    try {
+      const hobbies = await Model.Hobbies.findAll(
+        { where: {user_id: userId},
+        attributes: ['hobby']})
+      return hobbies;
+    } catch (err) {
+      return err
+    }
   }
 }
 
