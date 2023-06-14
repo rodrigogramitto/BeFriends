@@ -40,7 +40,7 @@ function App() {
     0: <Questionnaire viewSwitcher={viewSwitcher} />,
     1: <Profile viewSwitcher={viewSwitcher} user={user} currentUser={currentUser} />,
     2: <DiscoverMode />,
-    3: <FriendCircle />,
+    3: <FriendCircle currentUser={currentUser}/>,
     4: <MyCalendar />
   }
   return (
