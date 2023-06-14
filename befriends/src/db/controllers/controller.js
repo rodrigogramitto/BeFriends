@@ -4,13 +4,23 @@ import sequelize from '../sequelize.js';
 const Controller = {
 
   getUser: async (username) => {
-    console.log(username);
     try {
       const user = await Model.Userinfo.findOne({
+        include: [
+          {
+            model: Model.Usercircle,
+            attributes: ['circle_id']
+          },
+          {
+          model: Model.Pictures,
+          attributes: ['url', 'caption']
+          }
+        ],
         where: { username: username.username}
       })
       return user
     } catch (err) {
+      console.log(err)
       return err.data
     }
   },
@@ -40,6 +50,16 @@ const Controller = {
       const messages = await sequelize.query(`SELECT * FROM message WHERE message.${column} = ${chatId};`)
       return messages;
     } catch (err) {
+      return err.data;
+    }
+  },
+
+  addMessage: async (message) => {
+    try {
+      const newMessage = await Model.Userinfo.create(message);
+      return newMessage;
+    } catch (err) {
+      console.log(err);
       return err.data;
     }
   },

@@ -24,6 +24,16 @@ router.get('/chats/:chattype/:chatid', (req, res) => {
     })
 });
 
+router.post('/messages', (req, res) => {
+  Controller.addMessage(req.body)
+  .then((data) => {
+    res.send(data)
+  })
+  .catch((err) => {
+    res.send(err);
+  })
+});
+
 router.post('/user', (req, res) => {
   Controller.addUser(req.body)
   .then((data) => {

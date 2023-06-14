@@ -4,12 +4,12 @@ import sequelize from '../sequelize.js';
 
 const UserCircle = sequelize.define(
   'usercircle', {
-    id: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      primaryKey: true,
-      autoincrement: true
-    },
+    // id: {
+    //   type: DataTypes.INTEGER,
+    //   allowNull: false,
+    //   primaryKey: true,
+    //   autoincrement: true
+    // },
     user_id: {
       type: DataTypes.INTEGER,
       allowNull: false
@@ -17,6 +17,10 @@ const UserCircle = sequelize.define(
     circle_id: {
       type: DataTypes.INTEGER,
     }
+  },
+  {
+    freezeTableName: true,
+    timestamps: false
   }
 )
 
