@@ -10,6 +10,7 @@ import axios from "axios";
 import DiscoverMode from "./components/Discover/discoverMode.jsx";
 import FriendCircle from "./components/FriendCircle/friendCircle.jsx";
 
+
 function App() {
   const { isAuthenticated } = useAuth0();
   const [currentView, setCurrentView] = useState(0);
