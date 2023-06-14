@@ -1,9 +1,11 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 
 const Browser = () => {
-  const friendCircles = ["Horses", "Painting", "Soccer", "Basketball", "Puzzles", "Video Games", "Reading", "Kardashians", "Tik-Tok", "Self Development", "Programming"];
+  const [friendCircles, setFriendCircles] = useState(["Horses", "Painting", "Soccer", "Basketball", "Puzzles", "Video Games", "Reading", "Kardashians", "Tik-Tok", "Self Development", "Programming"]);
 
-  const [searchCircles, setSearchCircles] = useState(friendCircles);
+  const circleInput = useRef();
+
+  const [searchCircles, setSearchCircles] = useState(friendCircles)
 
   const handleChange = (e) => {
     var value = e.target.value.toLowerCase();
@@ -17,10 +19,30 @@ const Browser = () => {
     }
   }
 
+  const handleAddCircleClick = () => {
+      var newCircle = circleInput.current.value;
+      setFriendCircles(friendCircles.concat(newCircle));
+      setSearchCircles(searchCircles.concat(newCircle));
+      circleInput.current.value = '';
+  }
+
   return (
     <div className="flex flex-col">
         <div>
         <input type="text" placeholder="Search" onChange={(e)=>handleChange(e)} className="input input-bordered m-4 w-full max-w-xs" />
+        <button className="btn" onClick={()=>window.my_modal_1.showModal()}>+ Add a FriendCircle</button>
+        <dialog id="my_modal_1" className="modal">
+          <form method="dialog" className="modal-box">
+            <h3 className="font-bold text-lg">Add a FriendCircle</h3>
+            <p className="py-4">Please type in a name for a FriendCircle</p>
+            <div className="modal-action">
+            {/* if there is a button in form, it will close the modal */}
+            <input type="text" ref={circleInput}></input>
+            <input type='submit' onClick={handleAddCircleClick} />
+            <button className="btn">Close</button>
+            </div>
+          </form>
+        </dialog>
         </div>
         <div className="flex-wrap">
           {searchCircles.map((circle, i) => {
