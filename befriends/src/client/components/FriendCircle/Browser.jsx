@@ -21,9 +21,11 @@ const Browser = () => {
 
   const handleAddCircleClick = () => {
       var newCircle = circleInput.current.value;
-      setFriendCircles(friendCircles.concat(newCircle));
-      setSearchCircles(searchCircles.concat(newCircle));
-      circleInput.current.value = '';
+      if (newCircle !== '') {
+        setFriendCircles(friendCircles.concat(newCircle));
+        setSearchCircles(searchCircles.concat(newCircle));
+        circleInput.current.value = '';
+      }
   }
 
   return (
