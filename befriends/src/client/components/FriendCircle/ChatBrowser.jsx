@@ -6,7 +6,7 @@ const ChatBrowser = () => {
 
   const views = {
     0: <Browser />,
-    1: <Chat chatType={1} chatId={1} userId={1}/>,
+    // 1: <Chat chatType={1} chatId={1} userId={1}/>,
   }
   const [currentView, setCurrentView] = useState(0);
 

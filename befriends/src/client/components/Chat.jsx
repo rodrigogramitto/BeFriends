@@ -7,8 +7,12 @@ import io from "socket.io-client";
 function Chat({chatType, chatId, userId}) {
 
 const socket = io("http://localhost:3000");
+// const socket = io();
 socket.on('message', message => {
-  console.log('message from server', message);
+  // console.log('message from server', message);
+  let copy = messages.slice();
+  copy.push(message);
+  setMessages(copy);
 })
 
 const [text, setText] = useState('');
@@ -29,6 +33,7 @@ const handleSendClick = () => {
   let copy = messages.slice();
   copy.push(messageObj);
   setMessages(copy);
+  // console.log('sending a message', messageObj);
   socket.emit('message', messageObj);
   setText('');
 };
