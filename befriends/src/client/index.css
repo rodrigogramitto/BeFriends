@@ -344,7 +344,11 @@ Discover Mode
 
 #zip-dropdown {
   background-color: var(--color-accent);
-  border-radius: 5px;
   margin: 5px;
-  width: 25px;
+}
+
+#dropdown-options {
+  background-color: var(--color-accent);
+  display: flex;
+  align-content: center;
 }

@@ -1,6 +1,7 @@
 import React, { useState, useMemo, useRef } from 'react'
 import TinderCard from 'react-tinder-card'
 import FriendCard from './friendCard'
+import ZipCodeSearch from './zipcodeSearch'
 
 
 const db = [
@@ -62,7 +63,7 @@ const db = [
     }
   ]
 
-const distances = [1, 5, 10, 25, 50, 100];
+
 
 function DiscoverMode ({user, currentUser}) {
     const [currentIndex, setCurrentIndex] = useState(db.length - 1)
@@ -112,23 +113,17 @@ function DiscoverMode ({user, currentUser}) {
       updateCurrentIndex(newIndex)
       await childRefs[newIndex].current.restoreCard()
     }
+
+    const handleSwipeRight = (modal) => {
+      swipe('right');
+      modal.showModal()
+    }
   
     return (
     <div className="flex justify-center">
       <div>
         <h1 className="flex justify-center m-4">Discover Friends</h1>
-        <div className="flex flex-row m-5 justify-center">
-          <p className="align-center">Show friends within</p>
-          <div className="dropdown z-10">
-            <label tabIndex={0} className="btn w-12">Click</label>
-            <ul tabIndex={0} className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-25">
-              {distances.map((distance, i) => {
-                return (<li key={i}><a>{distance}</a></li>)
-              })}
-            </ul>
-          </div>
-          <p>miles</p>
-        </div>
+        <ZipCodeSearch />
         <div className='cardContainer'>
           {db.map((character, index) => (
             <TinderCard
@@ -145,8 +140,17 @@ function DiscoverMode ({user, currentUser}) {
         <div className='buttons'>
           <button style={{ backgroundColor: !canSwipe && '#c3c4d3', width: "50px" }} onClick={() => swipe('left')}>X</button>
           <button style={{ backgroundColor: !canGoBack && '#c3c4d3', width: "65px" }} onClick={() => goBack()}>Undo</button>
-          <button style={{ backgroundColor: !canSwipe && '#c3c4d3', width: "50px" }} onClick={() => swipe('right')}>✓</button>
+          <button style={{ backgroundColor: !canSwipe && '#c3c4d3', width: "50px" }} onClick={() => handleSwipeRight(modal)}>✓</button>
         </div>
+        <dialog id="modal" className="modal">
+          <form method="dialog" className="modal-box">
+            <h3 className="font-bold text-lg">Friend Status</h3>
+            <p className="py-4">Press ESC key or click the button below to close</p>
+            <div className="modal-action">
+              <button className="btn">Close</button>
+            </div>
+          </form>
+        </dialog>
         {lastDirection ? (
           <h2 key={lastDirection} className='infoText'>
             You swiped {lastDirection}
