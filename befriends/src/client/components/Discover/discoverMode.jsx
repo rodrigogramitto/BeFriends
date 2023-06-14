@@ -62,7 +62,9 @@ const db = [
     }
   ]
 
-function DiscoverMode () {
+const distances = [1, 5, 10, 25, 50, 100];
+
+function DiscoverMode ({user, currentUser}) {
     const [currentIndex, setCurrentIndex] = useState(db.length - 1)
     const [lastDirection, setLastDirection] = useState()
     // used for outOfFrame closure
@@ -115,6 +117,18 @@ function DiscoverMode () {
     <div className="flex justify-center">
       <div>
         <h1 className="flex justify-center m-4">Discover Friends</h1>
+        <div className="flex flex-row m-5 justify-center">
+          <p className="align-center">Show friends within</p>
+          <div className="dropdown z-10">
+            <label tabIndex={0} className="btn w-12">Click</label>
+            <ul tabIndex={0} className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-25">
+              {distances.map((distance, i) => {
+                return (<li key={i}><a>{distance}</a></li>)
+              })}
+            </ul>
+          </div>
+          <p>miles</p>
+        </div>
         <div className='cardContainer'>
           {db.map((character, index) => (
             <TinderCard

@@ -341,3 +341,10 @@ Discover Mode
   64%  { transform: scale(1,1) }
   100% { transform: scale(1,1) }
 }
+
+#zip-dropdown {
+  background-color: var(--color-accent);
+  border-radius: 5px;
+  margin: 5px;
+  width: 25px;
+}
