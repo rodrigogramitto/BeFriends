@@ -5,20 +5,36 @@ import io from "socket.io-client";
 //parameters: "circle" || "direct", id for either circle or direct, current user id
 //need to figure out if we have username or userId
 function Chat({chatType, chatId, userId}) {
+
 const socket = io("http://localhost:3000");
+// const socket = io();
 socket.on('message', message => {
-  console.log(message);
+  // console.log('message from server', message);
+  let copy = messages.slice();
+  copy.push(message);
+  setMessages(copy);
 })
 
 const [text, setText] = useState('');
+const [messages, setMessages] = useState([]);
 
 const handleTextChange = (event) => {
   const { value } = event.target;
   setText(value);
 };
 
+
 const handleSendClick = () => {
-  socket.emit('message', text);
+  //insert message into db
+  let messageObj = {
+    user_id : userId,
+    message: text,
+  };
+  let copy = messages.slice();
+  copy.push(messageObj);
+  setMessages(copy);
+  // console.log('sending a message', messageObj);
+  socket.emit('message', messageObj);
   setText('');
 };
 
@@ -30,9 +46,6 @@ const handleSendClick = () => {
   //all other messages display on the right
   //if the user sends new messages, insert a message into the db and display it.
   //socket io for the chat?
-
-  const [messages, setMessages] = useState([]);
-
 
 
   useEffect(() => {
