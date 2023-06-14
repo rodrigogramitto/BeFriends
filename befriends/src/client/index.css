@@ -203,6 +203,23 @@ Profile
   position: fixed;
 }
 
+.avatar {
+  margin-left: 1em;
+}
+
+.profile-main {
+  display: flex;
+  flex-direction: column;
+  margin-left: 1em;
+}
+
+.profile-content {
+  display: flex;
+}
+.profile-feed {
+  margin-left: 15em;
+}
+
 /*==============================================================
 NavBar
 ===============================================================*/

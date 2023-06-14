@@ -7,10 +7,10 @@ const router = express.Router({ mergeParams: true });
 router.get('/user/:username', (req, res) => {
   Controller.getUser(req.params)
   .then((user) => {
-    res.send(user)
+    res.send(user);
   })
   .catch((err) => {
-    res.send(err)
+    res.send(err);
   })
 });
 
