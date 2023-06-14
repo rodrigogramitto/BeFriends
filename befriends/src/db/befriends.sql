@@ -1,15 +1,15 @@
-DROP DATABASE IF EXISTS befriends;
-CREATE DATABASE befriends;
-\c befriends;
+-- DROP DATABASE IF EXISTS befriends;
+-- CREATE DATABASE befriends;
+-- \c befriends;
 
-DROP TABLE IF EXISTS userinfo;
-DROP TABLE IF EXISTS hobbies;
-DROP TABLE IF EXISTS pictures;
-DROP TABLE IF EXISTS friend;
-DROP TABLE IF EXISTS message;
-DROP TABLE IF EXISTS direct;
-DROP TABLE IF EXISTS circle;
-DROP TABLE IF EXISTS usercircle;
+-- DROP TABLE IF EXISTS userinfo;
+-- DROP TABLE IF EXISTS hobbies;
+-- DROP TABLE IF EXISTS pictures;
+-- DROP TABLE IF EXISTS friend;
+-- DROP TABLE IF EXISTS message;
+-- DROP TABLE IF EXISTS direct;
+-- DROP TABLE IF EXISTS circle;
+-- DROP TABLE IF EXISTS usercircle;
 DROP TABLE IF EXISTS events;
 
 CREATE TABLE userinfo (

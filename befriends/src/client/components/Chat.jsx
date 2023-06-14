@@ -5,8 +5,9 @@ import io from "socket.io-client";
 //parameters: "circle" || "direct", id for either circle or direct, current user id
 //need to figure out if we have username or userId
 function Chat({chatType, chatId, currentUser}) {
-
+const roomId = (chatType === 1 ? 'circle' + chatId : 'direct' + chatId);
 const socket = io("http://localhost:3000");
+socket.emit('create', roomId);
 // const socket = io();
 socket.on('message', message => {
   let copy = messages.slice();
