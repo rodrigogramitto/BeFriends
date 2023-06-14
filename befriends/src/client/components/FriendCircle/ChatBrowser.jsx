@@ -2,11 +2,12 @@ import Browser from "./Browser.jsx";
 import Chat from "../Chat.jsx"
 import { useState } from 'react';
 
-const ChatBrowser = ({currentUser}) => {
+const ChatBrowser = ({currentUser, currentChat}) => {
+
 
   const views = {
     0: <Browser />,
-    1: <Chat chatType={1} chatId={1} currentUser={currentUser}/>,
+    1: (currentChat > 0 ? <Chat chatType={1} chatId={currentChat} currentUser={currentUser}/> : <>No Chats Yet</>),
   }
   const [currentView, setCurrentView] = useState(0);
 
