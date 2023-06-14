@@ -266,3 +266,11 @@ Discover Mode
 #acceptbtn:hover {
   background-color: var(--color-success);
 }
+
+/*==============================================================
+Calendar
+===============================================================*/
+
+#my-modal-3 {
+display: flex,
+}
