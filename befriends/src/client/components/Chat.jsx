@@ -27,16 +27,27 @@ const handleTextChange = (event) => {
 
 const handleSendClick = () => {
   //insert message into db
-  let messageObj = {
+  let messageObj = (chatType === 1 ? {
     user_id : currentUser.id,
-    message: text,
-  };
+    circle_chat_id : chatId,
+    direct_chat_id : null,
+    message : text,
+    date : Date.now()
+  } : {
+    user_id : currentUser.id,
+    circle_chat_id : null,
+    direct_chat_id : chatId,
+    message : text,
+    date : Date.now()
+  })
   let copy = messages.slice();
   copy.push(messageObj);
   setMessages(copy);
+  messageObj.room = roomId;
   console.log('sending a message', messageObj);
   socket.emit('message', messageObj);
   setText('');
+  axios.post("http://localhost:3000/messages", messageObj);
 };
 
 
@@ -60,6 +71,8 @@ if (messages.length === 0) {
   return (
     <>
       <div>No Messages Yet!</div>
+      <input type="text" placeholder="Type here" className="input input-bordered w-full max-w-xs" value={text} onChange={handleTextChange}/>
+      <button className="btn" onClick={handleSendClick}>Send</button>
     </>
   )} else {
     return (
@@ -82,8 +95,8 @@ if (messages.length === 0) {
           }
         })}
         <>
-        <input type="text" placeholder="Type here" className="input input-bordered w-full max-w-xs" value={text} onChange={handleTextChange}/>
-        <button className="btn" onClick={handleSendClick}>Send</button>
+          <input type="text" placeholder="Type here" className="input input-bordered w-full max-w-xs" value={text} onChange={handleTextChange}/>
+          <button className="btn" onClick={handleSendClick}>Send</button>
         </>
       </>
     )
