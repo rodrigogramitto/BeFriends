@@ -4,13 +4,23 @@ import sequelize from '../sequelize.js';
 const Controller = {
 
   getUser: async (username) => {
-    console.log(username);
     try {
       const user = await Model.Userinfo.findOne({
+        include: [
+          {
+            model: Model.Usercircle,
+            attributes: ['circle_id']
+          },
+          {
+          model: Model.Pictures,
+          attributes: ['url', 'caption']
+          }
+        ],
         where: { username: username.username}
       })
       return user
     } catch (err) {
+      console.log(err)
       return err.data
     }
   },
@@ -41,6 +51,36 @@ const Controller = {
       return messages;
     } catch (err) {
       return err.data;
+    }
+  },
+
+  addMessage: async (message) => {
+    try {
+      const newMessage = await Model.Messages.create(message);
+      return newMessage;
+    } catch (err) {
+      console.log(err);
+      return err.data;
+    }
+  },
+
+  getUserChats: async (userId) => {
+    try {
+      const userChats = await Model.Usercircle.findAll({
+        where: { user_id: userId },
+        include: {
+          model: Model.Circle,
+          attributes: ['id', 'name'],
+        },
+      });
+
+      return userChats.map((userChat) => ({
+        chatId: userChat.circle_id,
+        chatName: userChat.circle.name,
+      }));
+    } catch (err) {
+      console.error('Error retrieving user chats:', err);
+      return [];
     }
   },
 
@@ -100,6 +140,16 @@ const Controller = {
       return "Error retrieving events."
     }
   },
+
+  addFriends: async (friend) => {
+    try{
+      const newFriend = await Model.Friend.create(friend);
+      return newFriend;
+    }catch (err) {
+      console.error(err)
+      return "Error adding friend."
+    }
+  }
 }
 
 export default Controller;

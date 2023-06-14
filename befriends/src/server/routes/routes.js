@@ -7,10 +7,10 @@ const router = express.Router({ mergeParams: true });
 router.get('/user/:username', (req, res) => {
   Controller.getUser(req.params)
   .then((user) => {
-    res.send(user)
+    res.send(user);
   })
   .catch((err) => {
-    res.send(err)
+    res.send(err);
   })
 });
 
@@ -22,6 +22,28 @@ router.get('/chats/:chattype/:chatid', (req, res) => {
     .catch((err) => {
       res.status(400).send(err);
     })
+});
+
+router.get('/chats/:userid', (req, res) => {
+  Controller.getUserChats(req.params.userid)
+  .then((chats) => {
+    res.status(200).send(chats);
+  })
+  .catch((err) => {
+    res.status(400).send(err);
+  })
+})
+
+router.post('/messages', (req, res) => {
+  console.log('Request body', req.body);
+  Controller.addMessage(req.body)
+  .then((data) => {
+    res.send(data)
+  })
+  .catch((err) => {
+    console.log('Error inserting message', err);
+    res.send(err);
+  })
 });
 
 router.post('/user', (req, res) => {
@@ -47,6 +69,21 @@ router.get('/hobbies/:user_id', (req, res) => {
 
 router.get('/friends/:user_id', (req, res) => {
   Controller.getFriends(req.params.user_id)
+  .then((friends) => {
+    res.send(friends)
+  })
+  .catch((err) => {
+    res.send(err);
+  })
+});
+
+router.post('/friends/:user_id', (req, res) => {
+  const userId = req.params.user_id;
+  const friend = {
+    user_id: userId,
+    friend_user_id: req.body.friend_user_id
+  }
+  Controller.addFriends(friend)
   .then((friends) => {
     res.send(friends)
   })

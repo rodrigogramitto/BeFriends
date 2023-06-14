@@ -3,11 +3,11 @@ import sequelize from '../sequelize.js';
 
 const Messages = sequelize.define(
   'message', {
-    id: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      primaryKey: true
-    },
+    // id: {
+    //   type: DataTypes.INTEGER,
+    //   allowNull: false,
+    //   primaryKey: true
+    // },
     circle_chat_id: {
       type: DataTypes.INTEGER,
       allowNull: true,
@@ -30,7 +30,8 @@ const Messages = sequelize.define(
     },
   },
   {
-    freezeTableName: true
+    freezeTableName: true,
+    timestamps: false
   }
 )
 

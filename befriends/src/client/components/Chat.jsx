@@ -4,21 +4,38 @@ import io from "socket.io-client";
 
 //parameters: "circle" || "direct", id for either circle or direct, current user id
 //need to figure out if we have username or userId
-function Chat({chatType, chatId, userId}) {
+//chat Type of 1 is friend circles, 0 is DM
+function Chat({chatType, chatId, currentUser}) {
+const roomId = (chatType === 1 ? 'circle' + chatId : 'direct' + chatId);
 const socket = io("http://localhost:3000");
+socket.emit('create', roomId);
+// const socket = io();
 socket.on('message', message => {
-  console.log(message);
+  let copy = messages.slice();
+  copy.push(message);
+  setMessages(copy);
 })
 
 const [text, setText] = useState('');
+const [messages, setMessages] = useState([]);
 
 const handleTextChange = (event) => {
   const { value } = event.target;
   setText(value);
 };
 
+
 const handleSendClick = () => {
-  socket.emit('message', text);
+  //insert message into db
+  let messageObj = {
+    user_id : currentUser.id,
+    message: text,
+  };
+  let copy = messages.slice();
+  copy.push(messageObj);
+  setMessages(copy);
+  console.log('sending a message', messageObj);
+  socket.emit('message', messageObj);
   setText('');
 };
 
@@ -31,9 +48,6 @@ const handleSendClick = () => {
   //if the user sends new messages, insert a message into the db and display it.
   //socket io for the chat?
 
-  const [messages, setMessages] = useState([]);
-
-
 
   useEffect(() => {
     axios.get(`http://localhost:3000/chats/${chatType}/${chatId}`)
@@ -41,24 +55,36 @@ const handleSendClick = () => {
       .catch((err) => console.log('error getting messages', err));
   }, []);
 
+
 if (messages.length === 0) {
   return (
     <>
-      <div>Messages will display here</div>
-      <div>Text entry area for new messages goes here</div>
+      <div>No Messages Yet!</div>
     </>
   )} else {
     return (
       <>
         {messages.map((message, index) => {
-          if (message.user_id === userId) {
-            return (<div key={index}>user message: {message.message}</div>)
+          if (message.user_id === currentUser.id) {
+            return (
+              <>
+                <div className="chat chat-start">
+                  <div className="chat-bubble" key={index}>User: {message.message}</div>
+                </div>
+              </>)
           } else {
-            return (<div key={index}>other person message: {message.message}</div>)
+            return (
+            <>
+              <div className="chat chat-end">
+                <div className="chat-bubble" key={index}>Other: {message.message}</div>
+              </div>
+            </>)
           }
         })}
+        <>
         <input type="text" placeholder="Type here" className="input input-bordered w-full max-w-xs" value={text} onChange={handleTextChange}/>
-        <button className="btn" onClick={handleSendClick}>Submit which does not submit yet</button>
+        <button className="btn" onClick={handleSendClick}>Send</button>
+        </>
       </>
     )
   }

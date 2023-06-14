@@ -2,7 +2,7 @@ import CircleMessages from "./circleMessages";
 import ChatBrowser from "./ChatBrowser";
 import MyCalendar from "../Calendar.jsx"
 
-function FriendCircle () {
+function FriendCircle ({currentUser}) {
 
   return (
     <div className="flex justify-center" style={{height: "90%"}}>
@@ -33,7 +33,7 @@ function FriendCircle () {
                 height: "600px",
                 width: "800px",
                 }}>
-                <ChatBrowser/>
+                <ChatBrowser currentUser={currentUser}/>
             </div>
         </div>
    </div>

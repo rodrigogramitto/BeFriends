@@ -1,9 +1,10 @@
-import react from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 
 const dummyHobbies = ['Jousting', 'Holding Computers', 'Fly Fishing', 'Spelunking'];
 const dummyFriends = [`Peter L'Anguile`, 'John the Pokemon', 'Imogen Heap'];
 
-const Hobbies = ({ userHobbies, userFriends }) => {
+const Sidebar = ({ userHobbies, userFriends }) => {
 
   console.log(userFriends);
 
@@ -26,4 +27,9 @@ const Hobbies = ({ userHobbies, userFriends }) => {
   )
 }
 
-export default Hobbies;
+Sidebar.propTypes = {
+  userHobbies: PropTypes.arrayOf(PropTypes.object),
+  userFriends: PropTypes.arrayOf(PropTypes.object),
+};
+
+export default Sidebar;
