@@ -27,9 +27,17 @@ app.use(express.json());
 
 app.use(router);
 
-io.on('connection', socket => {
-  socket.emit('message', 'This is a chat');
+io.on('connection', (socket) => {
+  console.log(socket, 'connected!');
+  socket.on('message', (message) => {
+    console.log('I got a message!', message);
+    socket.broadcast.emit('message', message);
+  })
 })
+
+// io.on('message', (message) => {
+//   io.broadcast.emit(message);
+// })
 
 try {
   server.listen(process.env.PORT || 3001, () => {
