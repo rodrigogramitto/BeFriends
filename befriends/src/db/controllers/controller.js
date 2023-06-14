@@ -100,6 +100,16 @@ const Controller = {
       return "Error retrieving events."
     }
   },
+
+  addFriends: async (friend) => {
+    try{
+      const newFriend = await Model.Friend.create(friend);
+      return newFriend;
+    }catch (err) {
+      console.error(err)
+      return "Error adding friend."
+    }
+  }
 }
 
 export default Controller;
