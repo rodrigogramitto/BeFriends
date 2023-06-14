@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 
 const ProfileBanner = ({ profilePic }) => {
   //dummy image
-  const profileImg = "https://picsum.photos/id/237/300/300"
+  // const profileImg = "https://picsum.photos/id/237/300/300"
 
   return (
     <div className="profile-banner">
@@ -15,5 +16,9 @@ const ProfileBanner = ({ profilePic }) => {
     </div>
   )
 }
+
+ProfileBanner.propTypes = {
+  profilePic: PropTypes.string.isRequired,
+};
 
 export default ProfileBanner
