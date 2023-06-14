@@ -73,7 +73,33 @@ const Controller = {
     } catch (err) {
       return err.data;
     }
-  }
+  },
+
+  addEvent: async (event) => {
+    try {
+      const existingEvent = await Model.Events.findOne({ where: { name: event.name } });
+
+      if (existingEvent) {
+        return "Event already exists."
+      }
+
+      const newEvent = await Model.Events.create(event)
+      return newEvent;
+    } catch (err) {
+      console.error(err);
+      return "Error ocurred while saving event.";
+    }
+  },
+
+  getEvents: async () => {
+    try {
+      const events = await Model.Events.findAll()
+      return events;
+    } catch (err) {
+      console.error(err)
+      return "Error retrieving events."
+    }
+  },
 }
 
 export default Controller;

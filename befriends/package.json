@@ -28,7 +28,9 @@
     "react-big-calendar": "^1.8.1",
     "react-dom": "^18.2.0",
     "react-tinder-card": "^1.6.2",
-    "sequelize": "^6.32.0"
+    "sequelize": "^6.32.0",
+    "socket.io": "^4.6.2",
+    "socket.io-client": "^4.6.2"
   },
   "devDependencies": {
     "@types/react": "^18.0.37",

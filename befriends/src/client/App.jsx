@@ -10,9 +10,10 @@ import axios from 'axios';
 import DiscoverMode from './components/Discover/discoverMode.jsx';
 import FriendCircle from './components/FriendCircle/friendCircle.jsx';
 
+
 function App() {
   const { isAuthenticated } = useAuth0()
-  const [currentView, setCurrentView] = useState(2);
+  const [currentView, setCurrentView] = useState(4);
   const viewSwitcher = (num) => {
     setCurrentView(num);
   }

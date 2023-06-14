@@ -81,6 +81,7 @@ CREATE TABLE message (
 
 CREATE TABLE events (
   id serial PRIMARY KEY,
+  name varchar,
   start_date bigint,
   end_date bigint,
   circle_id int,
