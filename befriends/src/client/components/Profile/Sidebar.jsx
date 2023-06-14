@@ -1,31 +1,68 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from "react";
+import PropTypes from "prop-types";
 
-const dummyHobbies = ['Jousting', 'Holding Computers', 'Fly Fishing', 'Spelunking'];
-const dummyFriends = [`Peter L'Anguile`, 'John the Pokemon', 'Imogen Heap'];
+const dummyHobbies = [
+  "Jousting",
+  "Holding Computers",
+  "Fly Fishing",
+  "Spelunking",
+];
+const dummyFriends = [`Peter L'Anguile`, "John the Pokemon", "Imogen Heap"];
 
-const Sidebar = ({ userHobbies, userFriends }) => {
-
-  console.log(userFriends);
-
-  return (
-    userHobbies ?
-    <div >
-    <div>
-      <h4 className="card-title">Hobbies</h4>
-    <ul>
-      {userHobbies.map((hobby, key) => (<li key={key}>{hobby.hobby}</li>))}
-    </ul>
+const Sidebar = ({
+  user,
+  currentUser,
+  userHobbies,
+  userFriends,
+  handleFindFriendsClick,
+}) => {
+  return userHobbies ? (
+    <div className="profile-sidebar">
+      <div className="profile-header-container">
+        <div className="profile-header">
+          <h2>{`${user.given_name} ${user.family_name}`}</h2>
+          <h5>{currentUser.location}</h5>
+        </div>
+      </div>
+      <section className="profile-related">
+        <div className="profile-hobbies">
+          <h4 className="card-title">Hobbies</h4>
+          <ul className="profile-list">
+            {userHobbies.map((hobby, key) => (
+              <li key={key}>{hobby.hobby}</li>
+            ))}
+          </ul>
+        </div>
+        <div className="profile-hobbies">
+          <h4 className="card-title">Bess Frenz</h4>
+          <ul className="profile-list">
+            {userFriends.length === 0 ? (
+              <li className="profile-list-item">
+                No friends :&#40;
+                <button
+                  className="profile-discover-button"
+                  type="button"
+                  onClick={handleFindFriendsClick}
+                >
+                  Find Friends
+                </button>
+              </li>
+            ) : (
+              userFriends.map((friend, key) => (
+                <li key={key}>{`${friend.firstname} ${friend.lastname}`}</li>
+              ))
+            )}
+          </ul>
+        </div>
+        <button className="edit-profile-button" type="button">
+          Edit Profile
+        </button>
+      </section>
     </div>
-    <div>
-      <h4 className="card-title">Bess Frenz</h4>
-      <ul>
-        {userFriends.map((friend, key) => (<li key={key}>{friend.firstname + ' ' + friend.lastname}</li>))}
-      </ul>
-    </div>
-    </div> : <span className="loading loading-spinner loading-md"></span>
-  )
-}
+  ) : (
+    <span className="loading loading-spinner loading-md"></span>
+  );
+};
 
 Sidebar.propTypes = {
   userHobbies: PropTypes.arrayOf(PropTypes.object),
