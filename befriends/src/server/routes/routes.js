@@ -24,12 +24,24 @@ router.get('/chats/:chattype/:chatid', (req, res) => {
     })
 });
 
+router.get('/chats/:userid', (req, res) => {
+  Controller.getUserChats(req.params.userid)
+  .then((chats) => {
+    res.status(200).send(chats);
+  })
+  .catch((err) => {
+    res.status(400).send(err);
+  })
+})
+
 router.post('/messages', (req, res) => {
+  console.log('Request body', req.body);
   Controller.addMessage(req.body)
   .then((data) => {
     res.send(data)
   })
   .catch((err) => {
+    console.log('Error inserting message', err);
     res.send(err);
   })
 });

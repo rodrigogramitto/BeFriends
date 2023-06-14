@@ -33,6 +33,11 @@ io.on('connection', (socket) => {
     console.log('I got a message!', message);
     socket.broadcast.emit('message', message);
   })
+
+  socket.on('create', function(room) {
+    socket.join(room);
+  });
+
 })
 
 // io.on('message', (message) => {
