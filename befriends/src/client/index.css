@@ -214,41 +214,111 @@ NavBar
 /*==============================================================
 Discover Mode
 ===============================================================*/
-.discover-card {
-  width: 80%;
-}
-
-.name-and-hobbies {
-  border: 1px solid black;
-  width: 18vw;
-  height: 24vh;
-}
-
-#discover-info-card {
-  background-color: rgba(0,165,207, 0.5);
-  width: 20vw;
-}
-
-.photo{
-  width: 40%;
-  height: auto;
+.friend-hobbies {
+  border-radius: 10px;
+  height: 65%;
+  width: 125%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  background-color: rgb(0, 78, 100, 0.6);
+  box-shadow: 0px 0px 50px 0px rgba(0,0,0,0.10);
 }
 
 #discover-photos {
   display: flex;
   margin-left: 12%;
-  width: 15%;
-  height: 10%;
+  width: 20%;
+  height: 15%;
 }
 
-#disvoerBtns {
-  margin-top: 3%;
+.swipe {
+  position: absolute;
 }
 
-#rejectbtn:hover {
-  background-color: var(--color-error);
+.cardContainer {
+  width: 90vw;
+  max-width: 800px;
+  height: 400px;
+  display: flex;
+  flex-direction: column;
 }
 
-#acceptbtn:hover {
-  background-color: var(--color-success);
+.card {
+  position: relative;
+  background-color: #fff;
+  width: 80vw;
+  max-width: 800px;
+  height: 425px;
+  box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.30);
+  border-radius: 20px;
+  background-size: cover;
+  background-position: center;
+  background-color: var(--color-secondary);
+}
+
+.cardContent {
+  width: 100%;
+  height: 100%;
+}
+
+.card h3 {
+  position: absolute;
+  bottom: 0;
+  margin: 10px;
+  color: #fff;
+}
+
+.infoText {
+  width: 100%;
+  justify-content: center;
+  display: flex;
+  color: #fff;
+  animation-name: popup;
+  animation-duration: 800ms;
+}
+
+.buttons {
+  margin-top: 7%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+@media (max-width: 625px) {
+  .buttons {
+    flex-direction: column;
+  }
+}
+
+.buttons button {
+  flex-shrink: 0;
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  color: #fff;
+  font-size: 18px;
+  background-color: var(--color-accent);
+  transition: 200ms;
+  margin: 10px;
+  font-weight: bolder;
+  width: 160px;
+  box-shadow: 0px 0px 30px 0px rgba(0,0,0,0.10);
+}
+
+.buttons button:hover {
+  transform: scale(1.05);
+  background-color: var(--color-warning);
+}
+
+@keyframes popup {
+  0%   { transform: scale(1,1) }
+  10%  { transform: scale(1.1,1.1) }
+  30%  { transform: scale(.9,.9) }
+  50%  { transform: scale(1,1) }
+  57%  { transform: scale(1,1) }
+  64%  { transform: scale(1,1) }
+  100% { transform: scale(1,1) }
 }
