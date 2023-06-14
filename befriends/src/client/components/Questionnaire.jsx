@@ -1,9 +1,8 @@
 import React, { useRef, useState } from "react";
 import axios from "axios";
 import { useAuth0 } from "@auth0/auth0-react";
-import PropTypes from "prop-types";
 
-export default function Questionnaire({ viewSwitcher }) {
+export default function Questionnaire({ setCurrentUser, viewSwitcher }) {
   const { user } = useAuth0();
   const [hobbyTags, setHobbyTags] = useState([]);
   const [interestTags, setInterestTags] = useState([]);
@@ -60,7 +59,15 @@ export default function Questionnaire({ viewSwitcher }) {
       .post("http://localhost:3000/user", body)
       .then((response) => {
         console.log(response);
-        viewSwitcher(1);
+        axios
+          .get(`http://localhost:3000/user/${user.nickname}`)
+          .then((res) => {
+            setCurrentUser(res.data);
+            viewSwitcher(1);
+          })
+          .catch((err) => {
+            console.error(err);
+          });
       })
       .catch((err) => console.error(err));
   };
@@ -229,7 +236,3 @@ export default function Questionnaire({ viewSwitcher }) {
     </form>
   );
 }
-
-Questionnaire.propTypes = {
-  viewSwitcher: PropTypes.any.isRequired,
-};
