@@ -45,7 +45,9 @@ export default function Questionnaire({ setCurrentUser, viewSwitcher }) {
 
     const getGeolocation = async (location) => {
       try {
-        const response = await axios.get(`http://localhost:3000/geolocation/${location}`);
+        const response = await axios.get(
+          `http://localhost:3000/geolocation/${location}`
+        );
         return response.data;
       } catch (error) {
         console.error(error);
@@ -56,39 +58,39 @@ export default function Questionnaire({ setCurrentUser, viewSwitcher }) {
     let location = `${cityInput.current.value}, ${stateInput.current.value}`;
 
     getGeolocation(location)
-    .then((coordinates) => {
-      let body = {
-        firstname: user.given_name,
-        lastname: user.family_name,
-        username: user.nickname,
-        email: user.email,
-        birthday: formattedBirthdayString,
-        location: location, 
-        profile_pic: user.picture,
-        banner_pic: "placeholder",
-        hobbies: hobbyTags.concat(interestTags),
-        latitude: coordinates.lat,
-        longitude: coordinates.lng,
-      };
+      .then((coordinates) => {
+        let body = {
+          firstname: user.given_name,
+          lastname: user.family_name,
+          username: user.nickname,
+          email: user.email,
+          birthday: formattedBirthdayString,
+          location: location,
+          profile_pic: user.picture,
+          banner_pic: "https://picsum.photos/id/866/800/300",
+          hobbies: hobbyTags.concat(interestTags),
+          latitude: coordinates.lat,
+          longitude: coordinates.lng,
+        };
 
-      axios
-        .post("http://localhost:3000/user", body)
-        .then((response) => {
-          console.log(response);
-          axios
-            .get(`http://localhost:3000/user/${user.nickname}`)
-            .then((res) => {
-              setCurrentUser(res.data);
-              viewSwitcher(1);
-            })
-            .catch((err) => {
-              console.error(err);
-            });
-        })
-        .catch((err) => console.error(err));
-    })
-    .catch((error) => console.error(error));
-};
+        axios
+          .post("http://localhost:3000/user", body)
+          .then((response) => {
+            console.log(response);
+            axios
+              .get(`http://localhost:3000/user/${user.nickname}`)
+              .then((res) => {
+                setCurrentUser(res.data);
+                viewSwitcher(1);
+              })
+              .catch((err) => {
+                console.error(err);
+              });
+          })
+          .catch((err) => console.error(err));
+      })
+      .catch((error) => console.error(error));
+  };
   return (
     <form onSubmit={submitUserInfo}>
       <div className="questionnaire-form-modal">

@@ -17,7 +17,7 @@ router2.get('/discoverInfo/:id', (req, res) => {
       res.send(err)
     })
   })
-  
+
   router2.post('/friends/:user_id', (req, res) => {
     const userId = req.params.user_id;
     const friend = {
@@ -32,7 +32,7 @@ router2.get('/discoverInfo/:id', (req, res) => {
       res.send(err);
     })
   });
-  
+
   router2.delete('/friends/:user_id/:friend_user_id', (req, res) => {
     const { user_id, friend_user_id } = req.params;
     Controller.deleteFriend(user_id, friend_user_id)
@@ -41,7 +41,7 @@ router2.get('/discoverInfo/:id', (req, res) => {
     })
     .catch((err) => res.send(err))
   });
-  
+
   router2.get('/friends/:user_id/:friend_user_id', (req, res) => {
     const { user_id, friend_user_id } = req.params;
     Controller.areUsersFriends(user_id, friend_user_id)
