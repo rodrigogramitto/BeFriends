@@ -195,7 +195,6 @@ Profile
 ===============================================================*/
 
 .profile-banner {
-  background-image: url(https://picsum.photos/id/866/800/300);
   background-size: cover;
   display: flex;
   flex-direction: column;
