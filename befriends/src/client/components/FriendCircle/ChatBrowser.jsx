@@ -4,9 +4,6 @@ import { useState, useEffect } from 'react';
 
 const ChatBrowser = ({currentUser, currentChat}) => {
 
-  useEffect(() => {
-    console.log('current chat changed!')
-  }, [currentChat]);
 
   const views = {
     0: <Browser />,

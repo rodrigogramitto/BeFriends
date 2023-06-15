@@ -46,6 +46,48 @@ router.post('/messages', (req, res) => {
   })
 });
 
+router.get('/usernames/:chatid', (req, res) => {
+  Controller.getUsersByCircleId(req.params.chatid)
+  .then((usernames) => {
+    res.status(200).send(usernames);
+  })
+  .catch((err) => {
+    res.status(400).send(err);
+  })
+});
+
+router.post('/circles', (req, res) => {
+  Controller.createFriendCircle(req.body)
+  .then((data) => {
+    res.send(data);
+  })
+  .catch((err) => {
+    res.send(err);
+  })
+})
+
+//takes user id and friend circle id!
+router.post('/usercircle', (req, res) => {
+  Controller.joinFriendCircle(req.body)
+  .then((data) => {
+    res.send(data);
+  })
+  .catch((err) => {
+    res.send(err);
+  })
+})
+
+router.get('/circles', (req, res) => {
+  Controller.getCircles()
+  .then((circles) => {
+    res.send(circles)
+  })
+  .catch((err) => {
+    res.send(err)
+  });
+
+})
+
 router.post('/user', (req, res) => {
   Controller.addUser(req.body)
   .then((data) => {
