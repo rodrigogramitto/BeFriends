@@ -77,21 +77,6 @@ router.get('/friends/:user_id', (req, res) => {
   })
 });
 
-router.post('/friends/:user_id', (req, res) => {
-  const userId = req.params.user_id;
-  const friend = {
-    user_id: userId,
-    friend_user_id: req.body.friend_user_id
-  }
-  Controller.addFriends(friend)
-  .then((friends) => {
-    res.send(friends)
-  })
-  .catch((err) => {
-    res.send(err);
-  })
-});
-
 router.post('/event', (req, res) => {
   Controller.addEvent(req.body)
   .then((data) => {

@@ -5,7 +5,7 @@ function ZipCodeSearch () {
     const [distance, setDistance] = useState(0);
 
     const handleDistanceClick = (distance) => {
-        setDistance(distance)
+        setDistance(distance);
     }
 
     return (
