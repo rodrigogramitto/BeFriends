@@ -34,6 +34,14 @@ const Userinfo = sequelize.define('userinfo', {
     type: DataTypes.STRING,
     allowNull: true,
   },
+  latitude: {
+    type: DataTypes.DECIMAL,
+    allowNull: false,
+  },
+  longitude: {
+    type: DataTypes.DECIMAL,
+    allowNull: false,
+  }
 }, {
   freezeTableName: true,
   timestamps: false
