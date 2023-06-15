@@ -1,22 +1,31 @@
 import { useState, useRef, useEffect } from 'react';
 import axios from 'axios';
 
-const Browser = () => {
+const Browser = ({userChats, setUserChats, currentUser}) => {
   const [friendCircles, setFriendCircles] = useState(["Horses", "Painting", "Soccer", "Basketball", "Puzzles", "Video Games", "Reading", "Kardashians", "Tik-Tok", "Self Development", "Programming"]);
 
-  useEffect(() => {
-    axios.get('http://localhost:3000/circles')
-    .then((circles) => {
-      console.log('Circles', circles);
-      let circleObjs = circles.data.map((circle) => {return circle.name});
-      setFriendCircles(circleObjs);
-    })
-    .catch((err) => console.log('error', err));
-  }, []);
+  const[circleIdNames, setCircleIdNames] = useState({});
 
   const circleInput = useRef();
 
   const [searchCircles, setSearchCircles] = useState(friendCircles)
+
+  useEffect(() => {
+    axios.get('http://localhost:3000/circles')
+    .then((circles) => {
+      let allRooms = {}
+      let circleObjs = circles.data.map((circle) =>
+        {
+          allRooms[circle.name] = circle.id;
+          return circle.name
+        });
+      setCircleIdNames(allRooms);
+
+      setSearchCircles(circleObjs);
+      setFriendCircles(circleObjs);
+    })
+    .catch((err) => console.log('error', err));
+  }, []);
 
   const handleChange = (e) => {
     var value = e.target.value.toLowerCase();
@@ -30,13 +39,41 @@ const Browser = () => {
     }
   }
 
-  const handleAddCircleClick = () => {
+  const handleAddCircleClick = async () => {
       var newCircle = circleInput.current.value;
       if (newCircle !== '') {
-        setFriendCircles(friendCircles.concat(newCircle));
+        // setFriendCircles(friendCircles.concat(newCircle));
         setSearchCircles(searchCircles.concat(newCircle));
         circleInput.current.value = '';
+        let newCircleId = await axios.post('http://localhost:3000/circles', {
+          circlename: newCircle,
+          user_id: currentUser.id
+        });
+        //add the new friend circle to friend circles state for now
+        console.log('New Circle ID!', newCircleId);
+        let newChat = await axios.post('http://localhost:3000/usercircle', {
+          userid: currentUser.id,
+          circleid: newCircleId.data.id
+        })
+        console.log('New Chat to add', newChat);
+        let newestChat = {
+          chatId:  newCircleId.data.id,
+          chatName: newCircleId.data.name
+        }
+        let chatsCopy = userChats.slice();
+        let completeChat = [...chatsCopy, newestChat];
+        console.log('Chat Copy Complete', completeChat);
+        setUserChats(completeChat);
+
       }
+  }
+
+  const joinCircle = async (circle) => {
+    let circleid = circleIdNames[circle];
+    axios.post('http://localhost:3000/usercircle', {
+      userid: currentUser.id,
+      circleid: circleid
+    })
   }
 
   return (
@@ -59,7 +96,7 @@ const Browser = () => {
         </div>
         <div className="flex-wrap">
           {searchCircles.map((circle, i) => {
-               return ( <button key={i} className="btn btn-outline m-4">{circle}</button>)
+               return ( <button key={i} onClick={() => joinCircle(circle)}className="btn btn-outline m-4">{circle}</button>)
                  })}
         </div>
     </div>

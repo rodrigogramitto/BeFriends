@@ -266,11 +266,11 @@ areUsersFriends: async (userId, friendUserId) => {
       const newCircle = await Model.Circle.create({
         name: pair.circlename
         });
-      const addedUserToCircle = await Model.Usercircle.create({
-        user_id: pair.userid,
-        circle_id: newCircle.id
-      })
-      return addedUserToCircle;
+      // const addedUserToCircle = await Model.Usercircle.create({
+      //   user_id: pair.userid,
+      //   circle_id: newCircle.id
+      // })
+      return newCircle;
     } catch (err) {
       console.error(err);
       return "Error ocurred while creating circle.";
@@ -285,8 +285,8 @@ areUsersFriends: async (userId, friendUserId) => {
       if (userinCircle) {
         return "User already in friend circle!"
       }
-
-      const addedUserToCircle = await Model.Usercircle.create({ user_id: pair.userid, circle_id: pair.circleid })
+      console.log('THIS IS THE PAIR', pair);
+      const addedUserToCircle = await Model.Usercircle.create({ user_id: pair.userid, circle_id: pair.circleid });
       return addedUserToCircle;
     } catch (err) {
       console.error(err);

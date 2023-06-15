@@ -27,25 +27,25 @@ function DiscoverMode ({currentUser}) {
     }, [])
 
     // used for outOfFrame closure
-    
-    const childRefs = users.length > 0 ? users.map(() => React.createRef()) : ''; 
- 
+
+    const childRefs = users.length > 0 ? users.map(() => React.createRef()) : '';
+
     const canGoBack = currentIndex < users.length - 1
-  
+
     const canSwipe = currentIndex >= 0
-  
+
     // set last direction and decrease current index
     const swiped = (direction) => {
       setLastDirection(direction)
       setCurrentIndex(prevIndex => prevIndex - 1)
     }
-  
+
     const outOfFrame = (name, idx) => {
       console.log(`${name} (${idx}) left the screen!`, currentIndex)
 
       currentIndex >= idx && childRefs[idx].current.restoreCard()
     }
-  
+
     const swipe = async (dir) => {
       if (canSwipe && currentIndex < users.length) {
         await childRefs[currentIndex].current.swipe(dir) // Swipe the card!
@@ -57,7 +57,7 @@ function DiscoverMode ({currentUser}) {
       .then(() => console.log('friend removed'))
       .catch((err) => console.error(err))
     }
-  
+
     // increase current index and show card
     const goBack = async () => {
       if (!canGoBack) return
@@ -90,9 +90,9 @@ function DiscoverMode ({currentUser}) {
       areFriends(users[currentIndex].id);
       swipe('right');
       modalRef.current.showModal()
-      
+
     }
-    
+
     if (users.length === 0) {
       return (<div>Loading</div>)
     } else {

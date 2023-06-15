@@ -48,7 +48,7 @@ function FriendCircle ({currentUser}) {
                 height: "600px",
                 width: "800px",
                 }}>
-                <ChatBrowser currentUser={currentUser} currentChat={currentChat}/>
+                <ChatBrowser userChats={userChats} setUserChats={setUserChats} currentUser={currentUser} currentChat={currentChat}/>
             </div>
         </div>
    </div>
