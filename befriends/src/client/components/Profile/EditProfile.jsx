@@ -38,8 +38,8 @@ const EditProfile = ({ currentUser, userHobbies }) => {
       updateUser.profile_pic = profilePic;
       updateUser.banner_pic = bannerPic;
 
-      axios.put('http://localhost:3000/user', {
-      updateUser })
+      axios.put('http://localhost:3000/user',
+      updateUser)
       .then((res) => {
         console.log(res)
       })

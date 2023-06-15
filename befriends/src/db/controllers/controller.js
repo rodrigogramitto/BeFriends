@@ -152,12 +152,12 @@ const Controller = {
   },
 
   updateUser: async (user) => {
-    // console.log(user)
+    console.log(user)
     try {
-      const updatedUser = await Model.Userinfo.Update({
-
+      const updatedUser = await Model.Userinfo.update(user, {
+        where: { id: user.id}
       })
-      console.log(updatedUser)
+      // console.log('updated:', updatedUser)
       return updatedUser
     } catch (err) {
       console.log(err)
