@@ -253,9 +253,7 @@ areUsersFriends: async (userId, friendUserId) => {
   } catch (err) {
     return console.error(err)
   }
-}
-
-
+},
 
   createFriendCircle: async (pair) => {
     try {
