@@ -67,30 +67,36 @@ function DiscoverMode ({currentUser}) {
       await childRefs[newIndex].current.restoreCard()
     }
 
-    const addFriend = () => {
-      axios.post(`http://localhost:3000/friends/${currentUser.id}`, {
-        friend_user_id: users[currentIndex].id
-      })
-        .then(() => console.log('friend added'))
-        .catch((err) => console.error(err))
+    const addFriend = async () => {
+      try {
+        const response = await axios.post(`http://localhost:3000/friends/${currentUser.id}`, {
+          friend_user_id: users[currentIndex].id
+        })
+
+        return "Friend Added!";
+      } catch (err) {
+        return console.error(err);
+      }
     }
 
     const areFriends = async (friendId) => {
       try {
         const response = await axios.get(`http://localhost:3000/friends/${currentUser.id}/${friendId}`);
-        setAreTheyFriends(true);
-        return response.data;
+
+        setAreTheyFriends(response.data);
       } catch (err) {
         return console.error(err);
       }
     }
 
     const handleSwipeRight = () => {
-      addFriend(childRefs[currentIndex]);
-      areFriends(users[currentIndex].id);
-      swipe('right');
-      modalRef.current.showModal()
-
+      addFriend(childRefs[currentIndex])
+        .then(() => {
+          areFriends(users[currentIndex].id);
+          swipe('right');
+          modalRef.current.showModal()
+        })
+        .catch((err) => console.error(err));
     }
 
     if (users.length === 0) {
