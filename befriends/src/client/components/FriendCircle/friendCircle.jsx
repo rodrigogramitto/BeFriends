@@ -20,33 +20,17 @@ function FriendCircle ({currentUser}) {
   }, []);
 
   return (
-    <div className="flex justify-center" style={{height: "90%"}}>
-        <div className="flex flex-row gap-5" style={{
-            height: "80vh",
-            width: "90%",
-            }}>
-            <div className="flex flex-col">
-                <div style={{
-                border: "1px solid blue",
-                height: "600px",
-                width: "600px",
-                overflow: "auto",
-                }}>
-                <MyCalendar/>
+    <div className="flex justify-center" id="friend-circle-container" >
+        <div className="flex flex-row gap-5" id="fc-sub-container">
+            <div className="flex flex-col" id="fc-calendar-messages">
+                <div id="fc-calendar" >
+                    <MyCalendar/>
                 </div>
-                <div style={{
-                border: "1px solid blue",
-                height: "300px",
-                width: "400px",
-                }}>
-                <CircleMessages userChats={userChats} setCurrentChat={setCurrentChat} currentChat={currentChat} />
+                <div id="fc-circle-messages">
+                    <CircleMessages userChats={userChats} setCurrentChat={setCurrentChat} currentChat={currentChat} />
                 </div>
             </div>
-            <div style={{
-                border: "1px solid red",
-                height: "600px",
-                width: "800px",
-                }}>
+            <div id="fc-browser-container" >
                 <ChatBrowser currentUser={currentUser} currentChat={currentChat}/>
             </div>
         </div>
@@ -56,3 +40,4 @@ function FriendCircle ({currentUser}) {
 }
 
 export default FriendCircle;
+
