@@ -83,9 +83,11 @@ export default function Questionnaire({ setCurrentUser, viewSwitcher }) {
           </div>
 
           <div className="questionnaire-form-body">
-            <h5 className="questionnaire-form-subtitle">
-              Personal Information
-            </h5>
+            <div className="questionnaire-body-header">
+              <h5 className="questionnaire-form-subtitle">
+                Personal Information
+              </h5>
+            </div>
 
             <div className="questionnaire-form-input">
               <h6>Birthday:</h6>
@@ -170,10 +172,14 @@ export default function Questionnaire({ setCurrentUser, viewSwitcher }) {
               </select>
             </div>
 
-            <h5 className="questionnaire-form-subtitle">Hobbies & Interests</h5>
+            <div className="questionnaire-body-header">
+              <h5 className="questionnaire-form-subtitle">
+                Hobbies & Interests
+              </h5>
+            </div>
 
             <div className="questionnaire-form-input">
-              <h6>Hobbies:</h6>
+              <h6>Add 3 hobbies:</h6>
               <label htmlFor="hobbies-input"></label>
               <input
                 id="hobbies-input"
@@ -200,7 +206,7 @@ export default function Questionnaire({ setCurrentUser, viewSwitcher }) {
             </div>
 
             <div className="questionnaire-form-input">
-              <h6>Interests:</h6>
+              <h6>Add 3 interests:</h6>
               <label htmlFor="interests-input"></label>
               <input
                 id="interests-input"
