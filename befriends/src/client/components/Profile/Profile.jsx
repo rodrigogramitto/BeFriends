@@ -9,7 +9,6 @@ const Profile = ({ viewSwitcher, user, currentUser }) => {
   const [userHobbies, setUserHobbies] = useState([]);
   const [userFriends, setUserFriends] = useState([]);
 
-  //ProfileBanner needs profile_pic (varchar) and banner_pic (varchar)
   useEffect(() => {
     if (currentUser) {
       axios

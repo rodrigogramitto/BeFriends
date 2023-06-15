@@ -149,6 +149,20 @@ const Controller = {
       console.error(err)
       return "Error adding friend."
     }
+  },
+
+  updateUser: async (user) => {
+    // console.log(user)
+    try {
+      const updatedUser = await Model.Userinfo.Update({
+
+      })
+      console.log(updatedUser)
+      return updatedUser
+    } catch (err) {
+      console.log(err)
+      return err.data
+    }
   }
 }
 
