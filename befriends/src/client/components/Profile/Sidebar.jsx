@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import EditProfile from './EditProfile.jsx';
 
 const dummyHobbies = [
   "Jousting",
@@ -54,9 +55,7 @@ const Sidebar = ({
             )}
           </ul>
         </div>
-        <button className="edit-profile-button" type="button">
-          Edit Profile
-        </button>
+                <EditProfile currentUser={currentUser} userHobbies={userHobbies} />
       </section>
     </div>
   ) : (
