@@ -20,8 +20,9 @@ function FriendCircle ({currentUser}) {
   }, []);
 
   return (
-    <div className="flex justify-center" id="friend-circle-container" >
-        <div className="flex flex-row gap-5" id="fc-sub-container">
+    <div className="flex justify-center flex-col" id="friend-circle-container" >
+        <h1 className="flex justify-center m-4">FriendCircles™</h1>
+        <div className="flex flex-row gap-5 ml-20" id="fc-sub-container">
             <div className="flex flex-col" id="fc-calendar-messages">
                 <div id="fc-calendar" >
                     <MyCalendar/>
