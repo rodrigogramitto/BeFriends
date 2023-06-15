@@ -93,15 +93,10 @@ Questionnaire
 .questionnaire-form-modal {
   align-items: center;
   background-color: var(--color-primary);
-  bottom: 0;
   cursor: default;
   display: flex;
   justify-content: center;
-  left: 0;
-  position: fixed;
-  right: 0;
-  top: 0;
-  z-index: 1;
+  padding: 5% 0%;
 }
 
 .questionnaire-form-content {
@@ -127,6 +122,11 @@ Questionnaire
   border-bottom: 0.06em solid white;
 }
 
+.questionnaire-body-header {
+  display: flex;
+  justify-content: center;
+}
+
 .questionnaire-form-hobby,
 .questionnaire-form-interest  {
   display: flex;
@@ -150,7 +150,8 @@ Questionnaire
   align-items: center;
   display: flex;
   flex-direction: row;
-  margin: 0.5em 1em;
+  justify-content: flex-start;
+  margin: 5% 15%;
 }
 
 .questionnaire-form-input h6 {
@@ -470,4 +471,15 @@ Discover Mode
   57%  { transform: scale(1,1) }
   64%  { transform: scale(1,1) }
   100% { transform: scale(1,1) }
+}
+
+#zip-dropdown {
+  background-color: var(--color-accent);
+  margin: 5px;
+}
+
+#dropdown-options {
+  background-color: var(--color-accent);
+  display: flex;
+  align-content: center;
 }

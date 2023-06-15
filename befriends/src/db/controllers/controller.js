@@ -141,11 +141,44 @@ const Controller = {
     }
   },
 
-  addFriends: async (friend) => {
+  addFriend: async (friend) => {
     try{
       const newFriend = await Model.Friend.create(friend);
       return newFriend;
-    }catch (err) {
+    } catch (err) {
+      console.error(err)
+      return "Error adding friend."
+    }
+  },
+
+  deleteFriend: async (userId, friendUserId) => {
+    try {
+      await Model.Friend.destroy({
+        where: {
+          user_id: userId,
+          friend_user_id: friendUserId
+        }
+      })
+      return "Friend deleted successfully."
+    } catch (err) {
+      console.error(err)
+      return "Error deleting friend."
+    }
+  },
+
+  getDiscoverInfo: async (id) => {
+    try{
+      const query = `SELECT userinfo.id, userinfo.firstname, userinfo.lastname, userinfo.birthday, userinfo.location,
+      (SELECT JSON_AGG(hobbies.hobby) FROM hobbies WHERE userinfo.id = hobbies.user_id) as hobbies,
+      (SELECT JSON_AGG(pictures.url) FROM pictures WHERE userinfo.id = pictures.user_id) as photos
+    FROM userinfo
+    WHERE userinfo.id != ${id}
+    GROUP BY userinfo.id;`
+
+      const discoverInfo = await sequelize.query(query);
+      return discoverInfo;
+
+    } catch (err) {
       console.error(err)
       return "Error adding friend."
     }
@@ -163,7 +196,10 @@ const Controller = {
       console.log(err)
       return err.data
     }
-  }
+},
+
+
 }
+
 
 export default Controller;

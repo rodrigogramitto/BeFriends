@@ -1,9 +1,12 @@
 import Browser from "./Browser.jsx";
 import Chat from "../Chat.jsx"
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 const ChatBrowser = ({currentUser, currentChat}) => {
 
+  useEffect(() => {
+    console.log('current chat changed!')
+  }, [currentChat]);
 
   const views = {
     0: <Browser />,
