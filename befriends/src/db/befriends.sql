@@ -21,7 +21,9 @@ CREATE TABLE userinfo (
   birthday bigint,
   location varchar,
   profile_pic varchar,
-  banner_pic varchar
+  banner_pic varchar,
+  latitude numeric,
+  longitude numeric
 );
 
 CREATE TABLE hobbies (

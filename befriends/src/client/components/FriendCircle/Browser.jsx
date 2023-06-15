@@ -1,7 +1,18 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
+import axios from 'axios';
 
 const Browser = () => {
   const [friendCircles, setFriendCircles] = useState(["Horses", "Painting", "Soccer", "Basketball", "Puzzles", "Video Games", "Reading", "Kardashians", "Tik-Tok", "Self Development", "Programming"]);
+
+  useEffect(() => {
+    axios.get('http://localhost:3000/circles')
+    .then((circles) => {
+      console.log('Circles', circles);
+      let circleObjs = circles.data.map((circle) => {return circle.name});
+      setFriendCircles(circleObjs);
+    })
+    .catch((err) => console.log('error', err));
+  }, []);
 
   const circleInput = useRef();
 

@@ -48,7 +48,7 @@ function App() {
         currentUser={currentUser}
       />
     ),
-    2: <DiscoverMode />,
+    2: <DiscoverMode user={user} currentUser={currentUser}/>,
     3: <FriendCircle currentUser={currentUser}/>,
     4: <MyCalendar />,
   }

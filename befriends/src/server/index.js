@@ -3,6 +3,7 @@ import express from 'express';
 import logger from 'morgan';
 import path from 'path';
 import router from './routes/routes.js';
+import router2 from './routes/discoverRoutes.js';
 import { fileURLToPath } from 'url';
 import cors from 'cors';
 import http from 'http';
@@ -26,6 +27,7 @@ app.use(express.json());
 
 
 app.use(router);
+app.use(router2);
 
 io.on('connection', (socket) => {
   console.log(socket, 'connected!');

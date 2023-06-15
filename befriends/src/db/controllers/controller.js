@@ -115,6 +115,27 @@ const Controller = {
     }
   },
 
+  getUsersByCircleId : async (circleId) => {
+    try {
+      const users = await Model.Userinfo.findAll({
+        attributes: ['id', 'username'],
+        include: [
+          {
+            model: Model.Usercircle,
+            where: { circle_id: circleId },
+            attributes: [],
+          },
+        ],
+      });
+
+      return users;
+    } catch (error) {
+      console.log('Error retrieving users:', error);
+      throw error;
+    }
+  },
+
+
   addEvent: async (event) => {
     try {
       const existingEvent = await Model.Events.findOne({ where: { name: event.name } });
@@ -141,15 +162,115 @@ const Controller = {
     }
   },
 
-  addFriends: async (friend) => {
+  getCircles: async () => {
+    try {
+      const circles = await Model.Circle.findAll();
+      return circles;
+    } catch (err) {
+      console.error(err)
+      return "Error retrieving circles."
+    }
+  },
+
+  addFriend: async (friend) => {
     try{
       const newFriend = await Model.Friend.create(friend);
       return newFriend;
-    }catch (err) {
+    } catch (err) {
       console.error(err)
       return "Error adding friend."
     }
-  }
+  },
+
+  deleteFriend: async (userId, friendUserId) => {
+    try {
+      await Model.Friend.destroy({
+        where: {
+          user_id: userId,
+          friend_user_id: friendUserId
+        }
+      })
+      return "Friend deleted successfully."
+    } catch (err) {
+      console.error(err)
+      return "Error deleting friend."
+    }
+  },
+
+
+  getDiscoverInfo: async (id) => {
+    try{
+      const query = `SELECT userinfo.id, userinfo.firstname, userinfo.lastname, userinfo.birthday, userinfo.location,
+      (SELECT JSON_AGG(hobbies.hobby) FROM hobbies WHERE userinfo.id = hobbies.user_id) as hobbies,
+      (SELECT JSON_AGG(pictures.url) FROM pictures WHERE userinfo.id = pictures.user_id) as photos
+    FROM userinfo
+    WHERE userinfo.id != ${id}
+    GROUP BY userinfo.id;`
+
+      const discoverInfo = await sequelize.query(query);
+      return discoverInfo;
+
+    } catch (err) {
+      console.error(err)
+      return "Error adding friend."
+    }
+  },
+
+  updateUser: async (user) => {
+    console.log(user)
+    try {
+      const updatedUser = await Model.Userinfo.update(user, {
+        where: { id: user.id}
+      })
+      // console.log('updated:', updatedUser)
+      return updatedUser
+    } catch (err) {
+      console.log(err)
+      return err.data
+    }
+},
+
+
+
+  createFriendCircle: async (pair) => {
+    try {
+      const existingCircle = await Model.Circle.findOne({ where: { name: pair.circlename } });
+
+      if (existingCircle) {
+        return "Circle already exists!"
+      }
+
+      const newCircle = await Model.Circle.create({
+        name: pair.circlename
+        });
+      const addedUserToCircle = await Model.Usercircle.create({
+        user_id: pair.userid,
+        circle_id: newCircle.id
+      })
+      return addedUserToCircle;
+    } catch (err) {
+      console.error(err);
+      return "Error ocurred while creating circle.";
+    }
+  },
+
+  //pair takes in user id and circle id as properties
+  joinFriendCircle: async (pair) => {
+    try {
+      const userinCircle = await Model.Usercircle.findOne({ where: { user_id: pair.userid, circle_id: pair.circleid } });
+
+      if (userinCircle) {
+        return "User already in friend circle!"
+      }
+
+      const addedUserToCircle = await Model.Usercircle.create({ user_id: pair.userid, circle_id: pair.circleid })
+      return addedUserToCircle;
+    } catch (err) {
+      console.error(err);
+      return "Error ocurred while adding user to friend circle.";
+    }
+  },
 }
+
 
 export default Controller;
