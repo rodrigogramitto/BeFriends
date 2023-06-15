@@ -31,7 +31,7 @@ io.on('connection', (socket) => {
   console.log(socket, 'connected!');
   socket.on('message', (message) => {
     console.log('I got a message!', message);
-    socket.broadcast.emit('message', message);
+    socket.to(message.room).emit('message', message);
   })
 
   socket.on('create', function(room) {

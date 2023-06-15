@@ -5,7 +5,7 @@ import Sidebar from "./Sidebar.jsx";
 import Feed from "./Feed.jsx";
 import { useAuth0 } from "@auth0/auth0-react";
 
-const Profile = ({ user, currentUser }) => {
+const Profile = ({ viewSwitcher, user, currentUser }) => {
   const [userHobbies, setUserHobbies] = useState([]);
   const [userFriends, setUserFriends] = useState([]);
 
@@ -31,21 +31,23 @@ const Profile = ({ user, currentUser }) => {
     }
   }, [user, currentUser]);
 
+  const handleFindFriendsClick = () => {
+    viewSwitcher(2);
+  };
+
   return user ? (
     <div className="profile-container">
       <ProfileBanner profilePic={user.picture} />
       <div className="profile-main">
-        <div className="profile-header">
-          <h2>{user.given_name + " " + user.family_name}</h2>
-          <h5>{currentUser.location}</h5>
-        </div>
         <section className="profile-content">
-          <div className="profile-sidebar">
-            <Sidebar userHobbies={userHobbies} userFriends={userFriends} />
-          </div>
-          <div className="profile-feed">
-            <Feed />
-          </div>
+          <Sidebar
+            user={user}
+            currentUser={currentUser}
+            userHobbies={userHobbies}
+            userFriends={userFriends}
+            handleFindFriendsClick={handleFindFriendsClick}
+          />
+          <Feed />
         </section>
       </div>
     </div>

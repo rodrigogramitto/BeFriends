@@ -3,6 +3,7 @@ import { Calendar, momentLocalizer } from 'react-big-calendar';
 import moment from 'moment';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import axios from 'axios';
+import Event from './Event.jsx';
 
 const localizer = momentLocalizer(moment);
 const events = [
@@ -14,6 +15,8 @@ const events = [
 const MyCalendar = () => {
   const [displayEvent, toggleDisplay] = useState(false);
   const [userEvents, setUserEvents] = useState(events);
+  const [selectedEvent, setSelectedEvent] = useState(null);
+  const [displaySelectedEvent, toggleSelectedEvent] = useState(false);
   const EventName = useRef('');
   const StartDate = useRef('');
   const EndDate = useRef('');
@@ -31,6 +34,7 @@ const MyCalendar = () => {
       console.error(err)
     })
   }, [])
+
   const displayEventModal = () => {
     toggleDisplay(true);
   };
@@ -38,6 +42,20 @@ const MyCalendar = () => {
   const closeEventModal = () => {
     toggleDisplay(false);
   };
+
+ const openSelectedEvent = () => {
+  toggleSelectedEvent(true)
+ }
+
+ const closeSelectedEvent = () => {
+  toggleSelectedEvent(false)
+ }
+
+
+  const handleEventSelect = (e) => {
+    setSelectedEvent(e);
+    openSelectedEvent();
+  }
 
   const submitEvent = () => {
     const newEvent = {}
@@ -58,7 +76,6 @@ const MyCalendar = () => {
     closeEventModal();
   }
 
-  console.log(userEvents)
   return (
     <div>
       <Calendar
@@ -67,6 +84,7 @@ const MyCalendar = () => {
         startAccessor="start"
         endAccessor="end"
         style={{ height: 500 }}
+        onSelectEvent={handleEventSelect}
       />
 
       <button className="btn" onClick={displayEventModal}>Add Event</button>
@@ -80,6 +98,7 @@ const MyCalendar = () => {
 
         </form>
       </dialog>
+      <Event selectedEvent={selectedEvent} closeSelectedEvent={closeSelectedEvent} displaySelectedEvent={displaySelectedEvent} />
     </div>
   );
 };
