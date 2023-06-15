@@ -27,25 +27,25 @@ function DiscoverMode ({currentUser}) {
     }, [])
 
     // used for outOfFrame closure
-    
-    const childRefs = users.length > 0 ? users.map(() => React.createRef()) : ''; 
- 
+
+    const childRefs = users.length > 0 ? users.map(() => React.createRef()) : '';
+
     const canGoBack = currentIndex < users.length - 1
-  
+
     const canSwipe = currentIndex >= 0
-  
+
     // set last direction and decrease current index
     const swiped = (direction) => {
       setLastDirection(direction)
       setCurrentIndex(prevIndex => prevIndex - 1)
     }
-  
+
     const outOfFrame = (name, idx) => {
       console.log(`${name} (${idx}) left the screen!`, currentIndex)
 
       currentIndex >= idx && childRefs[idx].current.restoreCard()
     }
-  
+
     const swipe = async (dir) => {
       if (canSwipe && currentIndex < users.length) {
         await childRefs[currentIndex].current.swipe(dir) // Swipe the card!
@@ -57,7 +57,7 @@ function DiscoverMode ({currentUser}) {
       .then(() => console.log('friend removed'))
       .catch((err) => console.error(err))
     }
-  
+
     // increase current index and show card
     const goBack = async () => {
       if (!canGoBack) return
@@ -67,32 +67,38 @@ function DiscoverMode ({currentUser}) {
       await childRefs[newIndex].current.restoreCard()
     }
 
-    const addFriend = () => {
-      axios.post(`http://localhost:3000/friends/${currentUser.id}`, {
-        friend_user_id: users[currentIndex].id
-      })
-        .then(() => console.log('friend added'))
-        .catch((err) => console.error(err))
+    const addFriend = async () => {
+      try {
+        const response = await axios.post(`http://localhost:3000/friends/${currentUser.id}`, {
+          friend_user_id: users[currentIndex].id
+        })
+
+        return "Friend Added!";
+      } catch (err) {
+        return console.error(err);
+      }
     }
 
     const areFriends = async (friendId) => {
       try {
         const response = await axios.get(`http://localhost:3000/friends/${currentUser.id}/${friendId}`);
-        setAreTheyFriends(true);
-        return response.data;
+
+        setAreTheyFriends(response.data);
       } catch (err) {
         return console.error(err);
       }
     }
 
     const handleSwipeRight = () => {
-      addFriend(childRefs[currentIndex]);
-      areFriends(users[currentIndex].id);
-      swipe('right');
-      modalRef.current.showModal()
-      
+      addFriend(childRefs[currentIndex])
+        .then(() => {
+          areFriends(users[currentIndex].id);
+          swipe('right');
+          modalRef.current.showModal()
+        })
+        .catch((err) => console.error(err));
     }
-    
+
     if (users.length === 0) {
       return (<div>Loading</div>)
     } else {

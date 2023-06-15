@@ -36,7 +36,7 @@ const Profile = ({ viewSwitcher, user, currentUser }) => {
 
   return user ? (
     <div className="profile-container">
-      <ProfileBanner profilePic={user.picture} />
+      <ProfileBanner profilePic={user.picture} currentUser={currentUser} />
       <div className="profile-main">
         <section className="profile-content">
           <Sidebar

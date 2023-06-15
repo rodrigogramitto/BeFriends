@@ -1,17 +1,19 @@
 import Model from '../../db/models/index.js';
 
-//Model.Userinfo.create({
+// Model.Userinfo.create({
 //    firstname: "Antonio",
 //    lastname: "Perez",
 //    username: "aperez",
 //    email: "aperez@bing.com",
 //    birthday: 9199515,
-//    location: "Austin, Tx",
+//    location: "Austin, Texas",
 //    profile_pic: "https://randomuser.me/api/portraits/men/64.jpg",
-//    banner_pic: "bannerpictureurl",
-//})
+//    banner_pic: "https://picsum.photos/id/866/800/300",
+//    latitude: 30.2672,
+//    longitude: -97.7431
+// })
 
-//Model.Userinfo.create({
+// Model.Userinfo.create({
 //    firstname: "Jackson",
 //    lastname: "Pollock",
 //    username: "jpollock",
@@ -19,10 +21,12 @@ import Model from '../../db/models/index.js';
 //    birthday: 9199517,
 //    location: "Atlanta, Georgia",
 //    profile_pic: "https://randomuser.me/api/portraits/men/83.jpg",
-//    banner_pic: "bannerpictureurl",
-//})
+//    banner_pic: "https://picsum.photos/id/866/800/300",
+//    latitude: 33.7488,
+//    longitude: -84.3877
+// })
 
-//Model.Userinfo.create({
+// Model.Userinfo.create({
 //    firstname: "Ismael",
 //    lastname: "Primera",
 //    username: "iprimera",
@@ -30,10 +34,12 @@ import Model from '../../db/models/index.js';
 //    birthday: 9199519,
 //    location: "Atlanta, Georgia",
 //    profile_pic: "https://randomuser.me/api/portraits/men/80.jpg",
-//    banner_pic: "bannerpictureurl",
-//})
+//    banner_pic: "https://picsum.photos/id/866/800/300",
+//    latitude: 33.7488,
+//    longitude: -84.3877
+// })
 
-//Model.Userinfo.create({
+// Model.Userinfo.create({
 //    firstname: "Arturo",
 //    lastname: "Sandoval",
 //    username: "asandoval",
@@ -41,10 +47,12 @@ import Model from '../../db/models/index.js';
 //    birthday: 9199523,
 //    location: "Atlanta, Georgia",
 //    profile_pic: "https://randomuser.me/api/portraits/men/78.jpg",
-//    banner_pic: "bannerpictureurl",
-//})
+//    banner_pic: "https://picsum.photos/id/866/800/300",
+//    latitude: 33.7488,
+//    longitude: -84.3877
+// })
 
-//Model.Userinfo.create({
+// Model.Userinfo.create({
 //    firstname: "Sara",
 //    lastname: "Cross",
 //    username: "scross",
@@ -52,10 +60,12 @@ import Model from '../../db/models/index.js';
 //    birthday: 9199526,
 //    location: "Seattle, Washington",
 //    profile_pic: "https://randomuser.me/api/portraits/women/70.jpg",
-//    banner_pic: "bannerpictureurl",
-//})
+//    banner_pic: "https://picsum.photos/id/866/800/300",
+//    latitude: 47.6062,
+//    longitude: -122.3321
+// })
 
-//Model.Userinfo.create({
+// Model.Userinfo.create({
 //    firstname: "Steven",
 //    lastname: "Gales",
 //    username: "sgales",
@@ -63,10 +73,12 @@ import Model from '../../db/models/index.js';
 //    birthday: 9199529,
 //    location: "Birmingham, Alabama",
 //    profile_pic: "https://randomuser.me/api/portraits/men/73.jpg",
-//    banner_pic: "bannerpictureurl",
-//})
+//    banner_pic: "https://picsum.photos/id/866/800/300",
+//    latitude: 33.5186,
+//    longitude: -86.8104
+// })
 
-//Model.Userinfo.create({
+// Model.Userinfo.create({
 //    firstname: "Mandy",
 //    lastname: "Banks",
 //    username: "mbanks",
@@ -74,8 +86,10 @@ import Model from '../../db/models/index.js';
 //    birthday: 9199534,
 //    location: "New York, New York",
 //    profile_pic: "https://randomuser.me/api/portraits/women/75.jpg",
-//    banner_pic: "bannerpictureurl",
-//})
+//    banner_pic: "https://picsum.photos/id/866/800/300",
+//    latitude: 40.7128,
+//    longitude: -74.0060
+// })
 
 Model.Userinfo.create({
     firstname: "Richard",
@@ -85,7 +99,7 @@ Model.Userinfo.create({
     birthday: 10101985,
     location: "Malibu, California",
     profile_pic: "https://www.paloaltoonline.com/news/photos/2014/april/22/35101_original.jpg",
-    banner_pic: "bannerpictureurl",
+    banner_pic: "https://picsum.photos/id/866/800/300",
     latitude: 34.035801,
     longitude: -118.691528
 })
@@ -98,7 +112,7 @@ Model.Userinfo.create({
     birthday: 10101990,
     location: "Irvine, California",
     profile_pic: "https://hbomax-images.warnermediacdn.com/images/GVw1ceAvTe8MEvJYJAAAD/tile?size=1280x720&format=jpeg&partner=hbocom&v=3da0884c906b6b370670c575d5ff568a&host=art-gallery.api.hbo.com",
-    banner_pic: "bannerpictureurl",
+    banner_pic: "https://picsum.photos/id/866/800/300",
     latitude: 33.685909,
     longitude: -117.824722
 })
@@ -111,7 +125,7 @@ Model.Userinfo.create({
     birthday: 10101992,
     location: "Long Beach, California",
     profile_pic: "https://i.ytimg.com/vi/UEQmHvqcAug/maxresdefault.jpg",
-    banner_pic: "bannerpictureurl",
+    banner_pic: "https://picsum.photos/id/866/800/300",
     latitude: 33.771709,
     longitude: -118.181313
 })
@@ -124,7 +138,7 @@ Model.Userinfo.create({
     birthday: 10101988,
     location: "Santa Monica, California",
     profile_pic: "https://i.ytimg.com/vi/UEQmHvqcAug/maxresdefault.jpg",
-    banner_pic: "bannerpictureurl",
+    banner_pic: "https://picsum.photos/id/866/800/300",
     latitude: 34.010929,
     longitude: -118.491508
 })
@@ -137,7 +151,7 @@ Model.Userinfo.create({
     birthday: 10101982,
     location: "West Covina, California",
     profile_pic: "https://i.ytimg.com/vi/UEQmHvqcAug/maxresdefault.jpg",
-    banner_pic: "bannerpictureurl",
+    banner_pic: "https://picsum.photos/id/866/800/300",
     latitude: 34.082730,
     longitude: -117.931480
 })
