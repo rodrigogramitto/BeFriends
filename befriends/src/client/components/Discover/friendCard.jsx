@@ -13,7 +13,9 @@ function FriendCard ({user}) {
         >
             <div className="flex justify-center m-5">
                 <div className="flex flex-row">
+                    <div style={{width: "30vw", height: "30vh", objectFit: "contain", marginBottom: "10%"}}>
                     <img style={{width: "30vw"}} src={main} alt="Friend Photo"/>
+                    </div>
                     <div className="flex flex-col m-4">
                         <p className="text-lg font-bold" >{`${user.firstname} ${user.lastname}`}</p>
                         <p className="text-sm" >{user.location}</p>
