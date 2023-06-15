@@ -77,13 +77,13 @@ const MyCalendar = () => {
   }
 
   return (
-    <div>
+    <div style={{ height: "85%", width: "85%"}}>
       <Calendar
         events={userEvents}
         localizer={localizer}
         startAccessor="start"
         endAccessor="end"
-        style={{ height: 500 }}
+        style={{ height: "100%", width: "100%"}}
         onSelectEvent={handleEventSelect}
       />
 

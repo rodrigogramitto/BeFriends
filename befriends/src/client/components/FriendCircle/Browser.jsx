@@ -96,7 +96,7 @@ const Browser = ({userChats, setUserChats, currentUser}) => {
         </div>
         <div className="flex-wrap">
           {searchCircles.map((circle, i) => {
-               return ( <button key={i} onClick={() => joinCircle(circle)}className="btn btn-outline m-4">{circle}</button>)
+               return ( <button key={i} onClick={() => joinCircle(circle)} id="browser-btn" className="btn btn-outline m-4">{circle}</button>)
                  })}
         </div>
     </div>
