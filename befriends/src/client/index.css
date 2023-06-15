@@ -482,3 +482,36 @@ Discover Mode
   display: flex;
   align-content: center;
 }
+/*==============================================================
+FriendCircle
+===============================================================*/
+
+#friend-circle-container {
+  background-color: var(--color-primary);
+}
+
+#fc-sub-container {
+  height: 80vh;
+  width: 90%;
+}
+
+#fc-calendar-messages {
+  background-color: var(--color-accent);
+}
+
+#fc-calendar {
+  height: 600px;
+  width: 600px;
+  overflow: auto;
+}
+
+#fc-browser-container {
+  width: 1000px;
+  height: 800px;
+  background-color: var(--color-accent);
+}
+
+#fc-circle-messages {
+  height: 300px;
+  width: 400px;
+}
