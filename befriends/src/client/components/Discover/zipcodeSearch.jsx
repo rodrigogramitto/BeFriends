@@ -1,9 +1,8 @@
 import {useState} from 'react'
 const distances = [1, 5, 10, 25, 50, 100];
 
-function ZipCodeSearch () {
-    const [distance, setDistance] = useState(0);
-
+function ZipCodeSearch ({distance, setDistance}) {
+    
     const handleDistanceClick = (distance) => {
         setDistance(distance);
     }

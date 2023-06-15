@@ -3,28 +3,64 @@ import axios from 'axios';
 import TinderCard from 'react-tinder-card';
 import FriendCard from './friendCard';
 import ZipCodeSearch from './zipcodeSearch';
+import NoMatch from './noMatch';
+import FriendStatusModal from './friendStatusModal';
+
+function haversine (lat1, lon1, lat2, lon2) {
+  const toRad = (val) => val * Math.PI / 180;
+  const R = 3958.8; 
+  const dLat = toRad(lat2 - lat1);
+  const dLon = toRad(lon2 - lon1);
+  lat1 = toRad(lat1);
+  lat2 = toRad(lat2);
+
+  const a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+            Math.sin(dLon/2) * Math.sin(dLon/2) * Math.cos(lat1) * Math.cos(lat2); 
+  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+  const distance = R * c; 
+
+  return distance; 
+}
 
 
 function DiscoverMode ({currentUser}) {
-    const [users, setUsers] = useState('')
+    const [users, setUsers] = useState([])
     const [currentIndex, setCurrentIndex] = useState(users.length - 1);
     const [lastDirection, setLastDirection] = useState();
     const [areTheyFriends, setAreTheyFriends] = useState(false);
+    const [distance, setDistance] = useState(0);
     const modalRef = useRef(null);
 
     useEffect(() => {
       axios.get(`http://localhost:3000/discoverInfo/${currentUser.id}`)
         .then((response) => {
-          const allUsers = response.data;
+          let allUsers = response.data
+
+          allUsers = allUsers.map(user => ({
+            ...user,
+            distance: haversine(
+              currentUser.latitude,
+              currentUser.longitude,
+              user.latitude,
+              user.longitude
+            )
+          }));
+
           const promises = allUsers.map((user) => areFriends(user.id));
           Promise.all(promises).then((results) => {
-            const notFriendsYet = allUsers.filter((_, index) => !results[index]);
+            const notFriendsYet = allUsers.filter((user, index) => {
+              if (distance === 0) {
+                return (!results[index])
+              } else {
+             return (!results[index] && user.distance <= distance)
+              }
+            });
             setUsers(notFriendsYet);
             setCurrentIndex(notFriendsYet.length - 1);
           });
         })
         .catch((err) => console.error(err))
-    }, [])
+    }, [distance])
 
     // used for outOfFrame closure
 
@@ -40,11 +76,13 @@ function DiscoverMode ({currentUser}) {
       setCurrentIndex(prevIndex => prevIndex - 1)
     }
 
-    const outOfFrame = (name, idx) => {
-      console.log(`${name} (${idx}) left the screen!`, currentIndex)
+const outOfFrame = (name, idx) => {
+  console.log(`${name} (${idx}) left the screen!`, currentIndex)
 
-      currentIndex >= idx && childRefs[idx].current.restoreCard()
-    }
+  if (childRefs[idx] && childRefs[idx].current) {
+    currentIndex >= idx && childRefs[idx].current.restoreCard()
+  }
+}
 
     const swipe = async (dir) => {
       if (canSwipe && currentIndex < users.length) {
@@ -60,7 +98,7 @@ function DiscoverMode ({currentUser}) {
 
     // increase current index and show card
     const goBack = async () => {
-      if (!canGoBack) return
+      if (!canGoBack) return 
       const newIndex = currentIndex + 1
       setCurrentIndex(newIndex)
       deleteFriend()
@@ -100,13 +138,15 @@ function DiscoverMode ({currentUser}) {
     }
 
     if (users.length === 0) {
-      return (<div>Loading</div>)
+      return (
+        <NoMatch distance={distance} setDistance={setDistance}/>
+        )
     } else {
     return (
     <div className="flex justify-center">
       <div>
         <h1 className="flex justify-center m-4">Discover Friends</h1>
-        <ZipCodeSearch />
+        <ZipCodeSearch distance={distance} setDistance={setDistance}/>
         <div className='cardContainer'>
           {users.map((user, index) => (
             <TinderCard
@@ -125,16 +165,7 @@ function DiscoverMode ({currentUser}) {
           <button style={{ backgroundColor: !canGoBack && '#c3c4d3', width: "65px" }} onClick={() => goBack()}>Undo</button>
           <button style={{ backgroundColor: !canSwipe && '#c3c4d3', width: "50px" }} onClick={() => handleSwipeRight(modal)}>✓</button>
         </div>
-        <dialog ref={modalRef} id="modal" className="modal">
-          <form method="dialog" className="modal-box">
-            <h3 className="font-bold text-lg">Friend Status</h3>
-            {areTheyFriends ? <p>New friend match! Go to FriendCircles to start talking to your friend</p> : <p>Waiting for a match, continue searching for friends</p>}
-            <p className="py-4">Press ESC key or click the button below to close</p>
-            <div className="modal-action">
-              <button className="btn">Close</button>
-            </div>
-          </form>
-        </dialog>
+        <FriendStatusModal modalRef={modalRef} areTheyFriends={areTheyFriends} currentUser={currentUser} currentFriend={users[currentIndex]}/>
         {lastDirection ? (
           <h2 key={lastDirection} className='infoText'>
             You swiped {lastDirection}

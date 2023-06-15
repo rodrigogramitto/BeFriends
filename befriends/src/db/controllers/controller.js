@@ -200,7 +200,7 @@ const Controller = {
 
   getDiscoverInfo: async (id) => {
     try{
-      const query = `SELECT userinfo.id, userinfo.firstname, userinfo.lastname, userinfo.birthday, userinfo.location,
+      const query = `SELECT *,
       (SELECT JSON_AGG(hobbies.hobby) FROM hobbies WHERE userinfo.id = hobbies.user_id) as hobbies,
       (SELECT JSON_AGG(pictures.url) FROM pictures WHERE userinfo.id = pictures.user_id) as photos
     FROM userinfo
