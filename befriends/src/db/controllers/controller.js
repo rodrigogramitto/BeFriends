@@ -115,6 +115,27 @@ const Controller = {
     }
   },
 
+  getUsersByCircleId : async (circleId) => {
+    try {
+      const users = await Model.Userinfo.findAll({
+        attributes: ['id', 'username'],
+        include: [
+          {
+            model: Model.Usercircle,
+            where: { circle_id: circleId },
+            attributes: [],
+          },
+        ],
+      });
+
+      return users;
+    } catch (error) {
+      console.log('Error retrieving users:', error);
+      throw error;
+    }
+  },
+
+
   addEvent: async (event) => {
     try {
       const existingEvent = await Model.Events.findOne({ where: { name: event.name } });
@@ -138,6 +159,16 @@ const Controller = {
     } catch (err) {
       console.error(err)
       return "Error retrieving events."
+    }
+  },
+
+  getCircles: async () => {
+    try {
+      const circles = await Model.Circle.findAll();
+      return circles;
+    } catch (err) {
+      console.error(err)
+      return "Error retrieving circles."
     }
   },
 
@@ -165,6 +196,7 @@ const Controller = {
       return "Error deleting friend."
     }
   },
+
 
   getDiscoverInfo: async (id) => {
     try{
@@ -224,6 +256,45 @@ areUsersFriends: async (userId, friendUserId) => {
 }
 
 
+
+  createFriendCircle: async (pair) => {
+    try {
+      const existingCircle = await Model.Circle.findOne({ where: { name: pair.circlename } });
+
+      if (existingCircle) {
+        return "Circle already exists!"
+      }
+
+      const newCircle = await Model.Circle.create({
+        name: pair.circlename
+        });
+      const addedUserToCircle = await Model.Usercircle.create({
+        user_id: pair.userid,
+        circle_id: newCircle.id
+      })
+      return addedUserToCircle;
+    } catch (err) {
+      console.error(err);
+      return "Error ocurred while creating circle.";
+    }
+  },
+
+  //pair takes in user id and circle id as properties
+  joinFriendCircle: async (pair) => {
+    try {
+      const userinCircle = await Model.Usercircle.findOne({ where: { user_id: pair.userid, circle_id: pair.circleid } });
+
+      if (userinCircle) {
+        return "User already in friend circle!"
+      }
+
+      const addedUserToCircle = await Model.Usercircle.create({ user_id: pair.userid, circle_id: pair.circleid })
+      return addedUserToCircle;
+    } catch (err) {
+      console.error(err);
+      return "Error ocurred while adding user to friend circle.";
+    }
+  },
 }
 
 
