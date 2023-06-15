@@ -50,19 +50,19 @@ const Browser = ({userChats, setUserChats, currentUser}) => {
           user_id: currentUser.id
         });
         //add the new friend circle to friend circles state for now
-        console.log('New Circle ID!', newCircleId);
+
         let newChat = await axios.post('http://localhost:3000/usercircle', {
           userid: currentUser.id,
           circleid: newCircleId.data.id
         })
-        console.log('New Chat to add', newChat);
+
         let newestChat = {
           chatId:  newCircleId.data.id,
           chatName: newCircleId.data.name
         }
-        let chatsCopy = userChats.slice();
-        let completeChat = [...chatsCopy, newestChat];
-        console.log('Chat Copy Complete', completeChat);
+
+        let completeChat = [...userChats, newestChat];
+
         setUserChats(completeChat);
 
       }
