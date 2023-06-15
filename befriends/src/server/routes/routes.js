@@ -140,5 +140,15 @@ router.get('/event', (req, res) => {
 
 })
 
+router.put('/user', (req, res) => {
+  Controller.updateUser(req.body)
+  .then((updatedUser) => {
+    res.send(updatedUser)
+  })
+  .catch((err) => {
+    res.send(err)
+  })
+})
+
 
 export default router;

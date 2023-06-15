@@ -216,30 +216,21 @@ const Controller = {
     }
   },
 
-  areUsersFriends: async (userId, friendUserId) => {
+  updateUser: async (user) => {
+    console.log(user)
     try {
-      const firstRelation = await Model.Friend.findOne({
-        where: {
-          user_id: userId,
-          friend_user_id: friendUserId
-        }
-      });
-      const secondRelation = await Model.Friend.findOne({
-        where: {
-          user_id: friendUserId,
-          friend_user_id: userId
-        }
-      });
-
-      if (firstRelation && secondRelation) {
-        return true;
-      } else {
-        return false;
-      }
+      const updatedUser = await Model.Userinfo.update(user, {
+        where: { id: user.id}
+      })
+      // console.log('updated:', updatedUser)
+      return updatedUser
     } catch (err) {
-      return console.error(err)
+      console.log(err)
+      return err.data
     }
-  },
+},
+
+
 
   createFriendCircle: async (pair) => {
     try {

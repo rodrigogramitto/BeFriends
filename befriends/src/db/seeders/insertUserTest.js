@@ -86,6 +86,8 @@ Model.Userinfo.create({
     location: "Malibu, California",
     profile_pic: "https://www.paloaltoonline.com/news/photos/2014/april/22/35101_original.jpg",
     banner_pic: "bannerpictureurl",
+    latitude: 34.035801,
+    longitude: -118.691528
 })
 
 Model.Userinfo.create({
@@ -97,6 +99,8 @@ Model.Userinfo.create({
     location: "Irvine, California",
     profile_pic: "https://hbomax-images.warnermediacdn.com/images/GVw1ceAvTe8MEvJYJAAAD/tile?size=1280x720&format=jpeg&partner=hbocom&v=3da0884c906b6b370670c575d5ff568a&host=art-gallery.api.hbo.com",
     banner_pic: "bannerpictureurl",
+    latitude: 33.685909,
+    longitude: -117.824722
 })
 
 Model.Userinfo.create({
@@ -108,6 +112,8 @@ Model.Userinfo.create({
     location: "Long Beach, California",
     profile_pic: "https://i.ytimg.com/vi/UEQmHvqcAug/maxresdefault.jpg",
     banner_pic: "bannerpictureurl",
+    latitude: 33.771709,
+    longitude: -118.181313
 })
 
 Model.Userinfo.create({
@@ -119,6 +125,8 @@ Model.Userinfo.create({
     location: "Santa Monica, California",
     profile_pic: "https://i.ytimg.com/vi/UEQmHvqcAug/maxresdefault.jpg",
     banner_pic: "bannerpictureurl",
+    latitude: 34.010929,
+    longitude: -118.491508
 })
 
 Model.Userinfo.create({
@@ -130,4 +138,6 @@ Model.Userinfo.create({
     location: "West Covina, California",
     profile_pic: "https://i.ytimg.com/vi/UEQmHvqcAug/maxresdefault.jpg",
     banner_pic: "bannerpictureurl",
+    latitude: 34.082730,
+    longitude: -117.931480
 })
