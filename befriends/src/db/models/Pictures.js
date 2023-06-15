@@ -4,12 +4,6 @@ import sequelize from '../sequelize.js';
 
 const Pictures = sequelize.define(
     'pictures', {
-      id: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        primaryKey: true,
-        autoincrement: true
-      },
       user_id: {
         type: DataTypes.INTEGER,
         allowNull: false,
@@ -22,6 +16,9 @@ const Pictures = sequelize.define(
         type: DataTypes.STRING,
         allowNull: false,
       }
+    }, {
+      freezeTableName: true,
+      timestamps: false
     }
   )
 
