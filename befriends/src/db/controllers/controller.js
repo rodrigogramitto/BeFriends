@@ -198,6 +198,31 @@ const Controller = {
     }
 },
 
+areUsersFriends: async (userId, friendUserId) => {
+  try {
+    const firstRelation = await Model.Friend.findOne({
+      where: {
+        user_id: userId,
+        friend_user_id: friendUserId
+      }
+    });
+    const secondRelation = await Model.Friend.findOne({
+      where: {
+        user_id: friendUserId,
+        friend_user_id: userId
+      }
+    });
+
+    if (firstRelation && secondRelation) {
+      return true;
+    } else {
+      return false;
+    }
+  } catch (err) {
+    return console.error(err)
+  }
+}
+
 
 }
 
