@@ -14,8 +14,8 @@ const ChatBrowser = ({userChats, setUserChats, currentUser, currentChat}) => {
   return (
     <div>
         <div className="tabs flex justify-center">
-            <a className="tab" onClick={()=>setCurrentView(0)}>Browser</a>
-            <a className="tab" onClick={()=>setCurrentView(1)}>Chat</a>
+            <a className="tab tab-bordered tab-lg" onClick={()=>setCurrentView(0)}>Browser</a>
+            <a className="tab tab-bordered tab-lg" onClick={()=>setCurrentView(1)}>Chat</a>
         </div>
         <div>
             {views[currentView]}
