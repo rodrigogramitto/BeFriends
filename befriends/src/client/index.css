@@ -346,7 +346,7 @@ Profile
   display: flex;
   flex-direction: column;
   margin-left: 5%;
-  max-height: 60vh;
+  max-height: 100vh;
   overflow: auto;
   padding: 1%;
   width: 75%;
