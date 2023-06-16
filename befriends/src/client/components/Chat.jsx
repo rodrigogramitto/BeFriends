@@ -6,6 +6,7 @@ import io from "socket.io-client";
 //need to figure out if we have username or userId
 //chat Type of 1 is friend circles, 0 is DM
 function Chat({chatType, chatId, currentUser}) {
+
 const roomId = (chatType === 1 ? 'circle' + chatId : 'direct' + chatId);
 const socket = io("http://localhost:3000");
 socket.emit('create', roomId);
@@ -18,6 +19,7 @@ socket.on('message', message => {
 
 const [text, setText] = useState('');
 const [messages, setMessages] = useState([]);
+const [usersPresent, setUsersPresent] = useState({});
 
 const handleTextChange = (event) => {
   const { value } = event.target;
@@ -44,7 +46,7 @@ const handleSendClick = () => {
   copy.push(messageObj);
   setMessages(copy);
   messageObj.room = roomId;
-  console.log('sending a message', messageObj);
+
   socket.emit('message', messageObj);
   setText('');
   axios.post("http://localhost:3000/messages", messageObj);
@@ -53,6 +55,14 @@ const handleSendClick = () => {
   useEffect(() => {
     axios.get(`http://localhost:3000/chats/${chatType}/${chatId}`)
       .then((results) => setMessages(results.data))
+      .then(() => axios.get(`http://localhost:3000/usernames/${chatId}`))
+      .then((users) => {
+        let usersinChat = {};
+        users.data.forEach((user) => {
+          usersinChat[user.id] = user.username;
+        })
+        setUsersPresent(usersinChat);
+      })
       .catch((err) => console.log('error getting messages', err));
   }, [chatId]);
 
@@ -72,14 +82,20 @@ if (messages.length === 0) {
             return (
               <>
                 <div className="chat chat-start">
-                  <div className="chat-bubble" key={index}>User: {message.message}</div>
+                    <div className="chat-header">
+                      {usersPresent[message.user_id]}
+                    </div>
+                  <div className="chat-bubble" key={index}>{message.message}</div>
                 </div>
               </>)
           } else {
             return (
             <>
               <div className="chat chat-end">
-                <div className="chat-bubble" key={index}>Other: {message.message}</div>
+              <div className="chat-header">
+                      {usersPresent[message.user_id]}
+                    </div>
+                <div className="chat-bubble" key={index}>{message.message}</div>
               </div>
             </>)
           }
