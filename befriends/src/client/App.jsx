@@ -50,16 +50,18 @@ function App() {
         currentUser={currentUser}
       />
     ),
-    2: <DiscoverMode user={user} currentUser={currentUser} />,
-    3: <FriendCircle currentUser={currentUser} />,
+    2: <DiscoverMode currentUser={currentUser}/>,
+    3: <FriendCircle currentUser={currentUser}/>,
     4: <MyCalendar />,
   };
   return (
     <>
+    <div >
       <NavBar
         viewSwitcher={viewSwitcher}
         currentView={currentView}
         setCurrentView={setCurrentView}
+        currentUser={currentUser}
       />
       {!isAuthenticated && <LoginButton />}
 
@@ -69,6 +71,7 @@ function App() {
           <LogoutButton />
         </>
       )}
+    </div>
     </>
   );
 }
