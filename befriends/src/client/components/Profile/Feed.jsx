@@ -15,8 +15,11 @@ const Feed = () => {
   return (
     <div className="profile-feed">
       <div className="profile-feed-header">
-        <h4 className="card-title">Post about your hobbies!</h4>
-      </div>
+        <div className="profile-feed-header2">
+        <h1 className="text-2xl mt-2">Post about your hobbies!</h1>
+        <AddPost dummyFeed={dummyFeed} setDummyFeed={setDummyFeed} dummyimages={dummyimages} setDummyImages={setDummyImages} />
+        </div>
+        </div>
       <div>
         <ul>
           {dummyFeed.map((feedEntry, index) => (
@@ -31,7 +34,6 @@ const Feed = () => {
           ))}
         </ul>
       </div>
-      <AddPost dummyFeed={dummyFeed} setDummyFeed={setDummyFeed} dummyimages={dummyimages} setDummyImages={setDummyImages} />
     </div>
   );
 };

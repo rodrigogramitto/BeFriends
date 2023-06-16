@@ -70,7 +70,9 @@ const handleSendClick = () => {
 if (messages.length === 0) {
   return (
     <>
-      <div>No Messages Yet!</div>
+    <div className="flex mt-5">
+      No Messages Yet 😔 start typing!
+    </div>
       <input type="text" placeholder="Type here" className="input input-bordered w-full max-w-xs" value={text} onChange={handleTextChange}/>
       <button className="btn" onClick={handleSendClick}>Send</button>
     </>
