@@ -14,6 +14,7 @@ const Sidebar = ({
   user,
   currentUser,
   userHobbies,
+  setUserHobbies,
   userFriends,
   handleFindFriendsClick,
 }) => {
@@ -55,7 +56,7 @@ const Sidebar = ({
             )}
           </ul>
         </div>
-        <EditProfile currentUser={currentUser} userHobbies={userHobbies} />
+        <EditProfile currentUser={currentUser} userHobbies={userHobbies} setUserHobbies={setUserHobbies}/>
       </section>
     </div>
   ) : (

@@ -4,36 +4,23 @@ import { useAuth0 } from "@auth0/auth0-react";
 
 export default function Questionnaire({ setCurrentUser, viewSwitcher }) {
   const { user } = useAuth0();
-  const [hobbyTags, setHobbyTags] = useState([]);
-  const [interestTags, setInterestTags] = useState([]);
+  const [ hobbyTags, setHobbyTags ] = useState([]);
   const birthdayInput = useRef();
   const cityInput = useRef();
   const stateInput = useRef();
   const hobbyInput = useRef();
-  const interestInput = useRef();
 
   const addHobby = () => {
     const hobby = hobbyInput.current.value;
-    if (hobby && hobbyTags.length < 3) {
+
+    if (hobby && hobbyTags.length < 10) {
       setHobbyTags((prevTags) => [...prevTags, hobby]);
       hobbyInput.current.value = "";
     }
   };
 
-  const addInterest = () => {
-    const interest = interestInput.current.value;
-    if (interest && interestTags.length < 3) {
-      setInterestTags((prevTags) => [...prevTags, interest]);
-      interestInput.current.value = "";
-    }
-  };
-
   const removeHobbyTag = (index) => {
     setHobbyTags((prevTags) => prevTags.filter((_, i) => i !== index));
-  };
-
-  const removeInterestTag = (index) => {
-    setInterestTags((prevTags) => prevTags.filter((_, i) => i !== index));
   };
 
   const submitUserInfo = (e) => {
@@ -68,7 +55,7 @@ export default function Questionnaire({ setCurrentUser, viewSwitcher }) {
           location: location,
           profile_pic: user.picture,
           banner_pic: "https://picsum.photos/id/866/800/300",
-          hobbies: hobbyTags.concat(interestTags),
+          hobbies: hobbyTags,
           latitude: coordinates.lat,
           longitude: coordinates.lng,
         };
@@ -192,13 +179,11 @@ export default function Questionnaire({ setCurrentUser, viewSwitcher }) {
             </div>
 
             <div className="questionnaire-body-header">
-              <h5 className="questionnaire-form-subtitle">
-                Hobbies & Interests
-              </h5>
+              <h5 className="questionnaire-form-subtitle">Hobbies</h5>
             </div>
 
             <div className="questionnaire-form-input">
-              <h6>Add 3 hobbies:</h6>
+              <h6>Add your hobbies:</h6>
               <label htmlFor="hobbies-input"></label>
               <input
                 id="hobbies-input"
@@ -212,47 +197,20 @@ export default function Questionnaire({ setCurrentUser, viewSwitcher }) {
               </button>
             </div>
 
-            <div className="questionnaire-form-hobby">
-              {hobbyTags.map((tag, index) => (
-                <span
-                  className="tag"
-                  key={index}
-                  onClick={() => removeHobbyTag(index)}
-                >
-                  &times;&nbsp;&nbsp;{tag}
-                </span>
-              ))}
-            </div>
-
-            <div className="questionnaire-form-input">
-              <h6>Add 3 interests:</h6>
-              <label htmlFor="interests-input"></label>
-              <input
-                id="interests-input"
-                maxLength="30"
-                placeholder=""
-                ref={interestInput}
-                type="text"
-              />
-              <button type="button" onClick={addInterest}>
-                Add
-              </button>
-            </div>
+            {hobbyTags && hobbyTags.length > 0 && (
+              <div className="questionnaire-form-hobby">
+                {hobbyTags.map((tag, index) => (
+                  <span
+                    className="tag"
+                    key={index}
+                    onClick={() => removeHobbyTag(index)}
+                  >
+                    &times;&nbsp;&nbsp;{tag}
+                  </span>
+                ))}
+              </div>
+            )}
           </div>
-
-          <div className="questionnaire-form-interest">
-            {interestTags.map((tag, index) => (
-              <span
-                className="tag"
-                key={index}
-                onClick={() => removeInterestTag(index)}
-              >
-                &times;&nbsp;&nbsp;{tag}
-              </span>
-            ))}
-          </div>
-          <></>
-
           <div className="questionnaire-form-footer">
             <button type="submit">Submit</button>
           </div>

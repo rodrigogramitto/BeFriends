@@ -143,15 +143,11 @@ Questionnaire
   justify-content: center;
 }
 
-.questionnaire-form-hobby,
-.questionnaire-form-interest  {
+.questionnaire-form-hobby {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: space-evenly;
-}
-
-.questionnaire-form-interest  {
-  margin-bottom: 1em;
+  flex-wrap: wrap;
 }
 
 .questionnaire-form-footer {
@@ -231,17 +227,7 @@ Profile
   display: flex;
   margin: 5%;
 }
-/*
- --color-primary: #004E64;
-  --color-secondary: #25A18E;
-  --color-accent: #00A5CF;
-  --color-neutral: #2a323c;
-  --color-base-100: #1d232a;
-  --color-info: #9FFFCB;
-  --color-success: #36d399;
-  --color-warning: #ec4899;
-  --color-error: #9f1239;
-*/
+
 .profile-container {
   color: white;
   padding-bottom: 1px;
@@ -250,7 +236,7 @@ Profile
 .profile-sidebar {
   background-color: rgba(0, 166, 207, 0.5);
   border-radius: 3%;
-  height: 1%;
+  /* height: 1%; */
   padding: 1%;
   width: 25%;
 }
@@ -316,6 +302,21 @@ Profile
   padding: 2%;
 }
 
+.edit-profile-modal {
+  background-color: var(--color-primary);
+  display: flex;
+  flex-direction: column;
+}
+
+.edit-input {
+  display: flex;
+  justify-content: space-around;
+}
+
+.edit-input input{
+  margin-left: 2em;
+}
+
 .profile-feed {
   align-items: center;
   border-radius: 3%;
@@ -364,6 +365,7 @@ Profile
   height: 35%;
   width: 35%;
 }
+
 
 /*==============================================================
 NavBar
