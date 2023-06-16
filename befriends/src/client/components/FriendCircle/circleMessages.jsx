@@ -8,9 +8,9 @@ function CircleMessages ({userChats, setCurrentChat}) {
         <a className="tab">Direct Messages</a>
           {(userChats.length > 0 ? userChats.map((chat, index) => {
             return (<a className="tab" key={index} onClick={() => setCurrentChat(chat.chatId)}> {chat.chatName}</a>)
-          }) :  <><a className="tab">Cave Divers</a>
-          <a className="tab">Jousters R Us</a>
-          <a className="tab">Fisherman</a></>)}
+          }) :  <><a className="tab tab-lg">Cave Divers</a>
+          <a className="tab tab-lg">Jousters R Us</a>
+          <a className="tab tab-lg">Fisherman</a></>)}
         </div>
     </div>
   )
