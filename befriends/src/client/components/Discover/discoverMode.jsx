@@ -127,7 +127,8 @@ const outOfFrame = (name, idx) => {
       }
     }
 
-    const handleSwipeRight = () => {
+    const handleSwipeRight = (dir) => {
+      if (dir === 'right') {
       addFriend(childRefs[currentIndex])
         .then(() => {
           areFriends(users[currentIndex].id);
@@ -135,6 +136,7 @@ const outOfFrame = (name, idx) => {
           modalRef.current.showModal()
         })
         .catch((err) => console.error(err));
+      }
     }
 
     if (users.length === 0) {
@@ -155,6 +157,9 @@ const outOfFrame = (name, idx) => {
             key={index}
             onSwipe={(dir) => swiped(dir, user.firstname, index)}
             onCardLeftScreen={() => outOfFrame(user.firstname, index)}
+            preventSwipe={['up', 'down']}
+            swipeRequirementType='position'
+            onSwipeRequirementFulfilled={(dir) => handleSwipeRight(dir) }
             >
                 <FriendCard user={user} />
             </TinderCard>
@@ -163,7 +168,7 @@ const outOfFrame = (name, idx) => {
         <div className='buttons'>
           <button style={{ backgroundColor: !canSwipe && '#c3c4d3', width: "50px" }} onClick={() => swipe('left')}>X</button>
           <button style={{ backgroundColor: !canGoBack && '#c3c4d3', width: "65px" }} onClick={() => goBack()}>Undo</button>
-          <button style={{ backgroundColor: !canSwipe && '#c3c4d3', width: "50px" }} onClick={() => handleSwipeRight(modal)}>✓</button>
+          <button style={{ backgroundColor: !canSwipe && '#c3c4d3', width: "50px" }} onClick={() => handleSwipeRight('right')}>✓</button>
         </div>
         <FriendStatusModal modalRef={modalRef} areTheyFriends={areTheyFriends} currentUser={currentUser} currentFriend={users[currentIndex]}/>
         {lastDirection ? (
