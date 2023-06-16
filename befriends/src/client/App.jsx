@@ -19,7 +19,7 @@ function App() {
   const viewSwitcher = (num) => {
     setCurrentView(num);
   };
-
+  
   useEffect(() => {
     if (user) {
       axios
