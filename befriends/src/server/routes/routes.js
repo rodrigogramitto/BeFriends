@@ -137,8 +137,27 @@ router.get('/event', (req, res) => {
   .catch((err) => {
     res.send(err)
   });
+});
 
-})
+router.post('/hobby', (req, res) => {
+  Controller.addHobby(req.body)
+  .then((response) => {
+    res.send(response)
+  })
+  .catch((err) => {
+    res.send(err)
+  });
+});
+
+router.delete('/hobby', (req, res) => {
+  Controller.deleteHobby(req.body)
+  .then((response) => {
+    res.send(response)
+  })
+  .catch((err) => {
+    res.send(err)
+  });
+});
 
 router.put('/user', (req, res) => {
   Controller.updateUser(req.body)
@@ -147,8 +166,8 @@ router.put('/user', (req, res) => {
   })
   .catch((err) => {
     res.send(err)
-  })
-})
+  });
+});
 
 
 export default router;

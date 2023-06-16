@@ -43,6 +43,7 @@ const Profile = ({ viewSwitcher, user, currentUser }) => {
             user={user}
             currentUser={currentUser}
             userHobbies={userHobbies}
+            setUserHobbies={setUserHobbies}
             userFriends={userFriends}
             handleFindFriendsClick={handleFindFriendsClick}
           />
