@@ -143,7 +143,7 @@ const outOfFrame = (name, idx) => {
         )
     } else {
     return (
-    <div className="flex justify-center">
+    <div id="discover-main" className="flex justify-center">
       <div>
         <h1 className="flex justify-center m-4">Discover Friends</h1>
         <ZipCodeSearch distance={distance} setDistance={setDistance}/>

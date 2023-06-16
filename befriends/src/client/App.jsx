@@ -21,7 +21,7 @@ function App() {
   // will need User from auth0 to retrieve data from server
   const { user } = useAuth0();
   const [currentUser, setCurrentUser] = useState({});
-
+  
   useEffect(() => {
     if (user) {
       axios
@@ -48,16 +48,18 @@ function App() {
         currentUser={currentUser}
       />
     ),
-    2: <DiscoverMode user={user} currentUser={currentUser}/>,
+    2: <DiscoverMode currentUser={currentUser}/>,
     3: <FriendCircle currentUser={currentUser}/>,
     4: <MyCalendar />,
   }
   return (
     <>
+    <div >
       <NavBar
         viewSwitcher={viewSwitcher}
         currentView={currentView}
         setCurrentView={setCurrentView}
+        currentUser={currentUser}
       />
       {!isAuthenticated && <LoginButton />}
 
@@ -67,6 +69,7 @@ function App() {
           <LogoutButton />
         </>
       )}
+    </div>
     </>
   );
 }
