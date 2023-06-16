@@ -120,50 +120,74 @@ const removeHobby = (index) => {
             <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
               ✕
             </button>
-            <div className="edit-input">
+            <h1 className="text-2xl flex justify-center mb-3">Edit your profile</h1>
+            <label className="mb-3">
+              <b className="font-bold">
               First Name:
+              </b>
               <input
+                className="ml-4"
                 type="text"
                 value={firstName}
                 onChange={handleFirstNameChange}
               />
-            </div>
-            <div className="edit-input">
+            </label>
+            <label className="mb-3">
+              <b className="font-bold">
               Last Name:
+              </b>
               <input
+                className="ml-4"
                 type="text"
                 value={lastName}
                 onChange={handleLastNameChange}
               />
-            </div>
-            <div className="edit-input">
-              User Location:
+            </label>
+            <label className="mb-3">
+              <b className="font-bold">
+              Location:
+              </b>
               <input
+                className="ml-4"
                 type="text"
                 value={location}
                 onChange={handleLocationChange}
               />
-            </div>
-            <div className="edit-input">
+            </label>
+            <label className="mb-3">
+             <b className="font-bold">
               Profile Picture:
-              <input
+              </b>
+              <label className="ml-4">url: </label>
+              <input    
                 type="text"
                 value={profilePic}
                 onChange={handleProfilePicChange}
               />
-            </div>
-            <div className="edit-input">
+            </label>
+            <label className="ml-10 mb-3">or upload: 
+             <input className="ml-2" type="file"/>
+            </label>
+            <label className="mb-3">
+              <b className="font-bold">
               Banner Picture:
+              </b>
+              <label className="ml-4">url: </label>
               <input
                 type="text"
                 value={bannerPic}
                 onChange={handleBannerPicChange}
               />
-            </div>
-
+            </label>
+            <label className="ml-10 mr-2">or upload: 
+            <input className="ml-2" type="file"/>
+           </label>
             <div className="questionnaire-form-input">
-              <h6>Add your hobbies:</h6>
-              <label htmlFor="hobbies-input"></label>
+              <label htmlFor="hobbies-input">
+                <b className="font-bold">
+                Add your hobbies:
+                </b>
+              </label>
               <input
                 id="hobbies-input"
                 maxLength="30"
@@ -171,32 +195,41 @@ const removeHobby = (index) => {
                 ref={hobbyInput}
                 type="text"
               />
-              <button type="button" onClick={addHobby}>
+              <button 
+              id="edit-profile-btns"
+              className="btn" 
+              type="button" 
+              onClick={addHobby}>
                 Add
               </button>
             </div>
-
+            <div >
             {userHobbies && userHobbies.length > 0 && (
-              <div className="questionnaire-form-hobby">
+              <div className="flex flex-wrap">
                 {userHobbies.map((tag, index) => (
                   <span
-                    className="tag"
+                    id="hobby-span"
+                    className="tag m-1"
                     key={index}
                     onClick={() => removeHobby(index)}
                   >
                     &times;&nbsp;&nbsp;{tag.hobby}
                   </span>
                 ))}
-              </div>
+              </div>    
             )}
-
+            </div>
+            <div className="flex justify-center">
             <button
+              id="edit-profile-btns"
               type="button"
-              className="edit-profile-button"
+              className="btn mt-4 w-20"
+              style={{color: "white"}}
               onClick={handleEditSubmit}
             >
               Update Me!
             </button>
+            </div>
           </form>
         </dialog>
       </div>

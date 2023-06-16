@@ -17,7 +17,7 @@
   --color-error: #9f1239;
   background-image: url(./images/background-image.png);
 
-  font-family: Roboto;
+  font-family: 'Roboto';
   line-height: 1.5;
   font-weight: 300;
 
@@ -40,6 +40,14 @@ a {
 a:hover {
   color: var(--color-primary);
   cursor: pointer;
+}
+
+label {
+  font-family: 'Libre Baskerville', serif;
+}
+
+input {
+  font-family: 'Roboto';
 }
 
 body {
@@ -193,7 +201,7 @@ Questionnaire
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #f9f9f9;
+  background-color: var(--color-secondary);
   cursor: pointer;
   transition: border-color 0.25s;
 }
@@ -366,6 +374,13 @@ Profile
   width: 35%;
 }
 
+#edit-profile-btns:hover {
+  background-color: var(--color-accent);
+}
+
+#hobby-span {
+  width: 40%;
+}
 
 /*==============================================================
 NavBar
