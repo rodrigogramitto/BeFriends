@@ -27,13 +27,14 @@ export default function AddPost({ dummyFeed, setDummyFeed }) {
   };
 
   return (
-    <div>
+    <div className="add-post w-50 ml-5">
       <button
-        className="edit-profile-button"
+        id="add-post-btn"
+        className="btn"
         type="button"
         onClick={() => modalRef.current.showModal()}
       >
-        Add Post
+        Add New Post
       </button>
       <dialog id="my_modal_1" className="modal" ref={modalRef}>
         <form method="dialog" className="modal-box add-post-modal-box">
@@ -44,7 +45,7 @@ export default function AddPost({ dummyFeed, setDummyFeed }) {
             ✕
           </button>
           <div className="add-post-input">
-            New Post:
+            <label className="text-lg mb-2">New Post:</label>
             <textarea
               className="textarea-lg add-post-textarea"
               maxLength="1000"
@@ -55,13 +56,14 @@ export default function AddPost({ dummyFeed, setDummyFeed }) {
           </div>
 
           <div className="add-post-photo">
+          <label>Add a photo: 
             <input
               type="file"
               className="file-input file-input-bordered w-full max-w-xs"
               accept="image/*"
               onChange={checkPhotoSubmit}
             />
-
+          </label>
             {addedPhoto && (
               <img
                 className="added-photo"
