@@ -68,6 +68,10 @@ h1 {
   font-family: 'Libre Baskerville', serif;
 }
 
+h4 {
+  font-family: 'Libre Baskerville', serif;
+}
+
 button {
   border-radius: 8px;
   border: 1px solid transparent;
@@ -374,6 +378,37 @@ Profile
   width: 35%;
 }
 
+.add-post-modal-box {
+  background-color: var(--color-primary);
+  display: flex;
+  flex-direction: column;
+}
+
+.add-post-input-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.add-post-input {
+  color: white;
+  display: flex;
+  flex-direction: column;
+}
+
+.add-post-textarea {
+  color: black;
+  height: 25vh;
+}
+
+.add-post-photo {
+  align-items: center;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 1em;
+}
 #edit-profile-btns:hover {
   background-color: var(--color-accent);
 }
