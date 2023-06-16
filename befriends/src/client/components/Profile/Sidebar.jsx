@@ -18,11 +18,16 @@ const Sidebar = ({
   userFriends,
   handleFindFriendsClick,
 }) => {
+  console.log(currentUser);
   return userHobbies ? (
     <div className="profile-sidebar">
       <div className="profile-header-container">
         <div className="profile-header">
+          {currentUser.firstname && currentUser.lastname ? (
+            <h4 className="text-4xl mb-3">{`${currentUser.firstname} ${currentUser.lastname}`}</h4>
+          ) : (
           <h4 className="text-4xl mb-3">{`${user.given_name} ${user.family_name}`}</h4>
+          )}
           <h4>{currentUser.location}</h4>
         </div>
       </div>

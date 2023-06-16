@@ -185,7 +185,7 @@ Questionnaire
 .questionnaire-form-input h6 {
   color: white;
   margin-right: 1em;
-  
+
 }
 
 .questionnaire-form-modal button{
@@ -346,6 +346,8 @@ Profile
   display: flex;
   flex-direction: column;
   margin-left: 5%;
+  max-height: 100vh;
+  overflow: auto;
   padding: 1%;
   width: 75%;
 }
