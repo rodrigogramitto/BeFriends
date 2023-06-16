@@ -15,6 +15,7 @@
   --color-success: #36d399;
   --color-warning: #ec4899;
   --color-error: #9f1239;
+  background-image: url(./images/background-image.png);
 
   font-family: Roboto;
   line-height: 1.5;
@@ -46,11 +47,17 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
+  background-image: url(./images/background-image.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
 }
 
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
+  font-family: 'Libre Baskerville', serif;
 }
 
 button {
@@ -86,13 +93,22 @@ button:focus-visible {
   }
 }
 
+#login {
+  position: relative;
+  background-image: url(./images/background-image.png);
+}
+
+#login-button:hover {
+  background-color: var(--color-primary);
+}
+
+
 /*==============================================================
 Questionnaire
 ===============================================================*/
 
 .questionnaire-form-modal {
   align-items: center;
-  background-color: var(--color-primary);
   cursor: default;
   display: flex;
   justify-content: center;
@@ -227,7 +243,6 @@ Profile
   --color-error: #9f1239;
 */
 .profile-container {
-  background-color: var(--color-primary);
   color: white;
   padding-bottom: 1px;
 }
@@ -355,7 +370,7 @@ NavBar
 ===============================================================*/
 
 .navbar {
-  background-color: var(--color-secondary);
+  background-color: rgba(37, 161, 142, 0.838);
   color:#1a1a1a;
 
 }
@@ -486,17 +501,13 @@ Discover Mode
 FriendCircle
 ===============================================================*/
 
-#friend-circle-container {
-  background-color: var(--color-primary);
-}
-
 #fc-sub-container {
   height: 80vh;
   width: 90%;
 }
 
 #fc-calendar-messages {
-  background-color: rgb(0,165,207, 0.8);
+  background-color: rgb(0,165,207, 0.6);
   border-radius: 10px;
   height: 600px;
   width: 540px;
@@ -512,7 +523,7 @@ FriendCircle
 #fc-browser-container {
   width: 1000px;
   height: 600px;
-  background-color: rgb(0,165,207, 0.8);
+  background-color: rgb(0,165,207, 0.6);
   overflow: auto;
   border-radius: 10px;
 }

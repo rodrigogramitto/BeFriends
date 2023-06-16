@@ -17,7 +17,9 @@ ReactDOM.createRoot(document.getElementById('root')).render(
       }}
     >
       <React.StrictMode>
-        <App />
+        <div className="app">
+          <App />
+        </div>
       </React.StrictMode>
     </Auth0Provider>,
 
