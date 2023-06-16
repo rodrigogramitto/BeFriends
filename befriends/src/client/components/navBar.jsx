@@ -1,8 +1,10 @@
 import { useAuth0 } from '@auth0/auth0-react';
+import defaultAvatar from '../images/avatar.png';
 import logo from '../images/befriends-logo.png';
 
-function NavBar ({viewSwitcher}) {
+function NavBar ({viewSwitcher, currentUser}) {
     const { logout } = useAuth0();
+    console.log('current user: ', currentUser);
 
     return (
         <div className="navbar">
@@ -25,7 +27,7 @@ function NavBar ({viewSwitcher}) {
             <div className="dropdown dropdown-end">
                 <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
                 <div className="w-10 rounded-full">
-                    <img src="https://picsum.photos/id/237/300/300" />
+                    <img src={currentUser.firstname ? currentUser.profile_pic : defaultAvatar }/> 
                 </div>
                 </label>
                 <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
@@ -36,7 +38,7 @@ function NavBar ({viewSwitcher}) {
                     </a>
                 </li>
                 <li><a>Settings</a></li>
-                <li><a onClick={() => logout({ logoutParams: { returnTo: window.location.origin } })} >Logout</a></li>
+                <li><a onClick={() => logout({ logoutParams: { returnTo: window.location.origin } })}> Logout</a></li>
                 </ul>
             </div>
             </div>
