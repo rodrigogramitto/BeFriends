@@ -32,7 +32,7 @@ function FriendCircle ({currentUser}) {
                 </div>
             </div>
             <div id="fc-browser-container" >
-                <ChatBrowser userChats={userChats} setUserChats={setUserChats} currentUser={currentUser} currentChat={currentChat}/>
+                <ChatBrowser userChats={userChats} setUserChats={setUserChats} currentUser={currentUser} currentChat={currentChat} />
             </div>
         </div>
    </div>
