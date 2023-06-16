@@ -68,7 +68,6 @@ function App() {
       {isAuthenticated && (
         <>
           {views[currentView]}
-          <LogoutButton />
         </>
       )}
     </div>
