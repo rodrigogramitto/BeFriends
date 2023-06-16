@@ -23,8 +23,8 @@ const Sidebar = ({
     <div className="profile-sidebar">
       <div className="profile-header-container">
         <div className="profile-header">
-          {currentUser.firstname && user.lastname ? (
-            <h4 className="text-4xl mb-3">{`${currentUser.firstname} ${user.lastname}`}</h4>
+          {currentUser.firstname && currentUser.lastname ? (
+            <h4 className="text-4xl mb-3">{`${currentUser.firstname} ${currentUser.lastname}`}</h4>
           ) : (
           <h4 className="text-4xl mb-3">{`${user.given_name} ${user.family_name}`}</h4>
           )}
