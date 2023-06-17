@@ -11,11 +11,26 @@ const ChatBrowser = ({userChats, setUserChats, currentUser, currentChat}) => {
   }
   const [currentView, setCurrentView] = useState(0);
 
+  const [browserTabState, setBrowserTabState] = useState("tab-active");
+  const [chatTabState, setChatTabState] = useState(null);
+
+  const browserTabClick = () => {
+    setCurrentView(0);
+    setBrowserTabState("tab-active");
+    setChatTabState(null);
+  }
+
+  const chatTabClick = () => {
+    setCurrentView(1)
+    setBrowserTabState(null);
+    setChatTabState("tab-active");
+  }
+
   return (
     <div>
         <div className="tabs flex justify-center">
-            <a className="tab tab-bordered tab-lg" onClick={()=>setCurrentView(0)}>Browser</a>
-            <a className="tab tab-bordered tab-lg" onClick={()=>setCurrentView(1)}>Chat</a>
+            <a className={`tab tab-bordered tab-lg ${browserTabState}`} onClick={browserTabClick}>Browser</a>
+            <a className={`tab tab-bordered tab-lg ${chatTabState}`} onClick={chatTabClick}>Chat</a>
         </div>
         <div>
             {views[currentView]}
