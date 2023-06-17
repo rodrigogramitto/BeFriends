@@ -27,7 +27,7 @@ const handleTextChange = (event) => {
 };
 
 
-const handleSendClick = () => {
+const handleSendClick = async () => {
   //insert message into db
   let messageObj = (chatType === 1 ? {
     user_id : currentUser.id,
@@ -49,7 +49,10 @@ const handleSendClick = () => {
 
   socket.emit('message', messageObj);
   setText('');
-  axios.post("http://localhost:3000/messages", messageObj);
+  delete messageObj.room;
+  console.log('About to insert message into db', messageObj);
+  let results = await axios.post("http://localhost:3000/messages", messageObj);
+  console.log('tried db insert', results);
 };
 
   useEffect(() => {
@@ -70,7 +73,9 @@ const handleSendClick = () => {
 if (messages.length === 0) {
   return (
     <>
-      <div>No Messages Yet!</div>
+    <div className="flex mt-5">
+      No Messages Yet 😔 start typing!
+    </div>
       <input type="text" placeholder="Type here" className="input input-bordered w-full max-w-xs" value={text} onChange={handleTextChange}/>
       <button className="btn" onClick={handleSendClick}>Send</button>
     </>
@@ -81,7 +86,7 @@ if (messages.length === 0) {
           if (message.user_id === currentUser.id) {
             return (
               <>
-                <div className="chat chat-start">
+                <div className="chat chat-start ml-2">
                     <div className="chat-header">
                       {usersPresent[message.user_id]}
                     </div>
@@ -91,7 +96,7 @@ if (messages.length === 0) {
           } else {
             return (
             <>
-              <div className="chat chat-end">
+              <div className="chat chat-end mr-2">
               <div className="chat-header">
                       {usersPresent[message.user_id]}
                     </div>
@@ -100,10 +105,10 @@ if (messages.length === 0) {
             </>)
           }
         })}
-        <>
-          <input type="text" placeholder="Type here" className="input input-bordered w-full max-w-xs" value={text} onChange={handleTextChange}/>
-          <button className="btn" onClick={handleSendClick}>Send</button>
-        </>
+        <div className="flex">
+          <input type="text" placeholder="Type here" className="input input-bordered w-5/6 mx-2 my-2" value={text} onChange={handleTextChange}/>
+          <button className="btn w-1/6 mr-2 my-2" onClick={handleSendClick}>Send</button>
+        </div>
       </>
     )
   }

@@ -83,20 +83,20 @@ export default function Questionnaire({ setCurrentUser, viewSwitcher }) {
       <div className="questionnaire-form-modal">
         <div className="questionnaire-form-content">
           <div className="questionnaire-form-header">
-            <h3 className="questionnaire-form-title">
+            <h4 className="questionnaire-form-title text-lg">
               Let&apos;s get to know you...
-            </h3>
+            </h4>
           </div>
 
           <div className="questionnaire-form-body">
             <div className="questionnaire-body-header">
-              <h5 className="questionnaire-form-subtitle">
+              <h4 className="questionnaire-form-subtitle text-sm">
                 Personal Information
-              </h5>
+              </h4>
             </div>
 
             <div className="questionnaire-form-input">
-              <h6>Birthday:</h6>
+              <h4 className="text-sm mr-2">Birthday: </h4>
               <label htmlFor="birthday-input"></label>
               <input
                 id="birthday-input"
@@ -108,7 +108,7 @@ export default function Questionnaire({ setCurrentUser, viewSwitcher }) {
             </div>
 
             <div className="questionnaire-form-input">
-              <h6>Location:</h6>
+              <h4 className="text-sm mr-2">Location:</h4>
               <label htmlFor="city-input"></label>
               <input
                 id="city-input"
@@ -179,29 +179,32 @@ export default function Questionnaire({ setCurrentUser, viewSwitcher }) {
             </div>
 
             <div className="questionnaire-body-header">
-              <h5 className="questionnaire-form-subtitle">Hobbies</h5>
+              <h4 className="questionnaire-form-subtitle text-sm">Hobbies</h4>
             </div>
 
-            <div className="questionnaire-form-input">
-              <h6>Add your hobbies:</h6>
-              <label htmlFor="hobbies-input"></label>
+            <div id="add-hobbies" className="questionnaire-form-input">
+              <label htmlFor="hobbies-input" className="text-sm">Add your hobbies:
               <input
+                className="ml-2"
                 id="hobbies-input"
                 maxLength="30"
                 placeholder=""
                 ref={hobbyInput}
                 type="text"
               />
+              
+              </label>
               <button type="button" onClick={addHobby}>
                 Add
               </button>
             </div>
-
+            <div>
             {hobbyTags && hobbyTags.length > 0 && (
-              <div className="questionnaire-form-hobby">
+              <div className="flex flex-wrap justify-center">
                 {hobbyTags.map((tag, index) => (
                   <span
-                    className="tag"
+                    id="hobby-span"
+                    className="tag m-1"
                     key={index}
                     onClick={() => removeHobbyTag(index)}
                   >
@@ -210,6 +213,7 @@ export default function Questionnaire({ setCurrentUser, viewSwitcher }) {
                 ))}
               </div>
             )}
+          </div>
           </div>
           <div className="questionnaire-form-footer">
             <button type="submit">Submit</button>

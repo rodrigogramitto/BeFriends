@@ -7,7 +7,10 @@ const ChatBrowser = ({userChats, setUserChats, currentUser, currentChat}) => {
 
   const views = {
     0: <Browser userChats={userChats} setUserChats={setUserChats} currentUser={currentUser} />,
-    1: (currentChat > 0 ? <Chat chatType={1} chatId={currentChat} currentUser={currentUser}/> : <>No Chats Yet</>),
+    1: (currentChat > 0 ? <Chat chatType={1} chatId={currentChat} currentUser={currentUser}/>
+     : <div className="flex justify-center mt-5">
+      No Chats Yet 😔 Click on a FriendCircle to get started!
+     </div>),
   }
   const [currentView, setCurrentView] = useState(0);
 

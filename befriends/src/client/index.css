@@ -17,7 +17,7 @@
   --color-error: #9f1239;
   background-image: url(./images/background-image.png);
 
-  font-family: Roboto;
+  font-family: 'Roboto';
   line-height: 1.5;
   font-weight: 300;
 
@@ -42,6 +42,14 @@ a:hover {
   cursor: pointer;
 }
 
+label {
+  font-family: 'Libre Baskerville', serif;
+}
+
+input {
+  font-family: 'Roboto';
+}
+
 body {
   margin: 0;
   place-items: center;
@@ -57,6 +65,10 @@ body {
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
+  font-family: 'Libre Baskerville', serif;
+}
+
+h4 {
   font-family: 'Libre Baskerville', serif;
 }
 
@@ -166,9 +178,14 @@ Questionnaire
   margin: 5% 15%;
 }
 
+#add-hobbies {
+  margin-top: 0%;
+}
+
 .questionnaire-form-input h6 {
   color: white;
   margin-right: 1em;
+
 }
 
 .questionnaire-form-modal button{
@@ -193,7 +210,7 @@ Questionnaire
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #f9f9f9;
+  background-color: var(--color-secondary);
   cursor: pointer;
   transition: border-color 0.25s;
 }
@@ -234,7 +251,7 @@ Profile
 }
 
 .profile-sidebar {
-  background-color: rgba(0, 166, 207, 0.5);
+  background-color: rgba(0, 166, 207, 0.6);
   border-radius: 3%;
   /* height: 1%; */
   padding: 1%;
@@ -243,13 +260,14 @@ Profile
 
 .profile-header-container {
   background-color: rgba(37, 161, 142, 0.7);
+  box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.30);
   border-radius: 3%;
   padding: 10%;
 }
 
 .profile-header {
   align-items: center;
-  background-color: var(--color-secondary);
+  background-color: rgb(0,0,0,0.10);
   border-radius: 3%;
   display: flex;
   flex-direction: column;
@@ -258,6 +276,7 @@ Profile
 
 .profile-related {
   background-color: rgba(37, 161, 142, 0.7);
+  box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.30);
   border-radius: 3%;
   display: flex;
   flex-direction: column;
@@ -267,7 +286,7 @@ Profile
 
 .profile-hobbies {
   align-items: center;
-  background-color: var(--color-secondary);
+  background-color: rgb(0,0,0,0.10);
   border-radius: 3%;
   display: flex;
   flex-direction: column;
@@ -295,11 +314,13 @@ Profile
 }
 
 .edit-profile-button {
-  background-color: white;
-  color: var(--color-base-100);
+  background-color: var(--color-accent);
+  color: white;
   font-size: 0.75em;
   margin-top: 5%;
   padding: 2%;
+  width: 100px;
+  margin-left: 40%;
 }
 
 .edit-profile-modal {
@@ -320,10 +341,13 @@ Profile
 .profile-feed {
   align-items: center;
   border-radius: 3%;
-  background-color: rgba(0, 166, 207, 0.5);
+  background-color: rgba(0, 166, 207, 0.6);
+  box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.30);
   display: flex;
   flex-direction: column;
   margin-left: 5%;
+  max-height: 100vh;
+  overflow: auto;
   padding: 1%;
   width: 75%;
 }
@@ -332,8 +356,18 @@ Profile
   background-color: var(--color-secondary);
   border-radius: 3%;
   margin-bottom: 2%;
-  padding: 5%;
+  padding: 2%;
   width: 100%;
+  display: flex;
+  align-content: center;
+}
+
+.profile-feed-header2 {
+  background-color: rgb(0,0,0,0.10);
+  width: 100%;
+  border-radius: 3%;
+  display: flex;
+  justify-content: center;
 }
 
 .profile-feed-header h4{
@@ -353,7 +387,7 @@ Profile
 }
 
 .feed-post li{
-  background-color: var(--color-secondary);
+  background-color: rgb(0,0,0,0.10);
   border-radius: 3%;
   margin: 0% 5%;
   padding: 2%;
@@ -366,6 +400,50 @@ Profile
   width: 35%;
 }
 
+#add-post-btn {
+  background-color: var(--color-primary);
+  color: white;
+}
+
+.add-post-modal-box {
+  background-color: var(--color-primary);
+  display: flex;
+  flex-direction: column;
+}
+
+.add-post-input-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.add-post-input {
+  color: white;
+  display: flex;
+  flex-direction: column;
+}
+
+.add-post-textarea {
+  color: black;
+  height: 25vh;
+}
+
+.add-post-photo {
+  align-items: center;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 1em;
+}
+#edit-profile-btns:hover {
+  background-color: var(--color-accent);
+}
+
+#hobby-span {
+  width: 40%;
+  background-color: var(--color-primary);
+}
 
 /*==============================================================
 NavBar
@@ -509,7 +587,8 @@ FriendCircle
 }
 
 #fc-calendar-messages {
-  background-color: rgb(0,165,207, 0.6);
+  background-color: rgb(0,165,207, 0.7);
+  box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.30);
   border-radius: 10px;
   height: 600px;
   width: 540px;
@@ -525,7 +604,8 @@ FriendCircle
 #fc-browser-container {
   width: 1000px;
   height: 600px;
-  background-color: rgb(0,165,207, 0.6);
+  background-color: rgb(0,165,207, 0.7);
+  box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.30);
   overflow: auto;
   border-radius: 10px;
 }

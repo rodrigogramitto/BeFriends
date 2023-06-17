@@ -235,13 +235,13 @@ const Controller = {
         throw new Error('User not found');
       }
 
-      // const hobbiesCount = await Model.Hobbies.count({
-      //   where: { user_id: user.id },
-      // });
+      const hobbiesCount = await Model.Hobbies.count({
+        where: { user_id: user.id },
+      });
 
-      // if (hobbiesCount >= 10) {
-      //   throw new Error('Exceeded the maximum limit of 10 hobbies');
-      // }
+      if (hobbiesCount >= 10) {
+        throw new Error('Exceeded the maximum limit of 10 hobbies');
+      }
 
       const newHobbies = await Promise.all(
         hobby.hobbies.map(async (hobbyItem) => {
