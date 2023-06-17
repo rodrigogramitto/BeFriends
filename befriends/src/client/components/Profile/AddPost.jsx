@@ -47,6 +47,7 @@ export default function AddPost({ dummyFeed, setDummyFeed }) {
           <div className="add-post-input">
             <label className="text-lg mb-2">New Post:</label>
             <textarea
+              style={{color: "white"}}
               className="textarea-lg add-post-textarea"
               maxLength="1000"
               placeholder="Write your new post here..."

@@ -25,35 +25,37 @@ BeFriends is a social networking app where users can create FriendCircles based 
 
 ## Questionnaire and Profile
 
-![Landing Page](./befriends/images/LandingPage.png)
+![Landing Page](./befriends/gifs/landing&auth0.gif)
 
 The landing page redirects to Auth0 where to user can either create an account or use their Google account to sign in. If this is the first time the user has visited the site, they will see a questionnaire to fill out basic information such as DOB and hobbies.
 
-![Profile](./befriends/images/Profile.png)
-![Edit Profile](./befriends/images/EditProfile.png)
 
 After the questionnaire or if the user already has an account, the user will be redirected to their profile page which displays a feed of posts from their FriendCircles. There is also a sidebar where users can see their own hobbies, photos and friends. There is also an edit profile button if the user wishes to update this information.
 
+![Profile](./befriends/gifs/profile.gif)
+![Edit Profile](./befriends/gifs/profile-edit.gif)
 ## Discover Mode
 
-![Discover](./befriends/images/DiscoverPage.png)
 
 The Discover Mode allows users to filter through users in their local area. The discover mode will show nearby users one at a time after the current user sets a location filter. The current user can see up to five photos uploaded by the users featured in the discover mode, as well as the hobbies of the featured users. The current user has the option to friend the displayed user, or not friend the displayed user. If both users request to be friends with each other, they will show up in each others friend lists, and posts from friended users will appear in the friend feed.
 
+![Discover](./befriends/gifs/discover.gif)
 ## FriendCircle
 
-![Circle](./befriends/images/FriendCircle.png)
 
 The FriendCircle page features the calendar for a user, the FriendCircles they are a part of, a browser for FriendCircles, and chats for FriendCircles. FriendCircles are groups focused around interests that users can create or join. Users can also create events for FriendCircles, and anyone in a FriendCircle is invited to that event.
 
-![Event](./befriends/images/CalendarEvent.png)
-![Agenda](./befriends/images/CalendarAgenda.png)
+![Circle](./befriends/images/FriendCircle.png)
 
 The calendar displays the events for all the FriendCircles the current user is a part of. Users can create events or edit events that they have created.
 
-![Chat](./befriends/images/Chat.png)
+![Calendar](./befriends/gifs/calendar.gif)
+
 
 Each FriendCircle also has a chat where anyone in a FriendCircle can speak with others in the FriendCircle.
+
+![Chat](./befriends/gifs/chat.gif)
+
 
 ## Installation
 
