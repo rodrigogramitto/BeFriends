@@ -155,3 +155,4 @@ Model.Userinfo.create({
     latitude: 34.082730,
     longitude: -117.931480
 })
+
