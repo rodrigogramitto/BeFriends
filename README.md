@@ -96,6 +96,7 @@ Open your browser and visit [http://localhost:5173](http://localhost:5173) to ac
 - **Styling**: Tailwind, Daisy UI
 - **Server**: Express, Auth0
 - **Database**: PostgreSQL
+- **Messaging**: Socket.io
 
 ## Contributions
 
